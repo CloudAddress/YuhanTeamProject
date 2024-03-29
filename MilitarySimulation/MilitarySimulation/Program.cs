@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace MilitarySimulation
 {
@@ -18,6 +19,12 @@ namespace MilitarySimulation
         static int salary = 100; //월급
         static string? input;
         static string? classA;//계급 표시
+
+        static int successfulReinforcements = 0; // 강화 성공 횟수를 추적하는 변수
+        static int failedReinforcements = 0;     // 강화 실패 횟수를 추적하는 변수
+        static int dishonorableDischarges = 0;    // 불명예 전역 횟수를 추적하는 변수
+        static int demotions = 0;                // 강등 횟수를 추적하는 변수
+        static int promotionMisses = 0;          // 진급 누락 횟수를 추적하는 변수
 
         static void Main(string[] args)
         {
@@ -74,7 +81,7 @@ namespace MilitarySimulation
                         Console.WriteLine("\n올바른 옵션을 선택하세요.\n");
                         break;
                 }
-
+            SaveGameDataToCSV();
             }
         }
         static void ReinforceItem()//강화시
@@ -107,9 +114,11 @@ namespace MilitarySimulation
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("\n진급의 실패했습니다...\n");
+                    failedReinforcements++;//실패 데이터
                     bool destroy = random.Next(100) < Destruction;
                     if (destroy) // 파괴(전역)
                     {
+                        dishonorableDischarges++; // 불명예 전역 데이터
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\n불명예 전역이...\n");
                         classM = 0;
@@ -118,6 +127,7 @@ namespace MilitarySimulation
                     }
                     else //강등
                     {
+                        demotions++;//강등 데이터
                         bool demote = random.Next(100) < demotion;
                         Console.ForegroundColor = ConsoleColor.Red;
                         if (demote)
@@ -144,6 +154,7 @@ namespace MilitarySimulation
                             }
                             else
                             {
+                                promotionMisses++; //진급 누락 데이터 
                                 Console.WriteLine("\n진급 누락되었습니다...\n");
                                 hobong -= 1;
                             }
@@ -152,6 +163,7 @@ namespace MilitarySimulation
                 }
                 else // 성공
                 {
+                    successfulReinforcements++;//성공 데이터
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     if (classM == 0 && hobong == 2 || classM == 1 && hobong == 6 || classM == 2 && hobong == 6 || classM == 3 && hobong == 4
                         || classM == 4 && hobong == 3 || classM == 5 && hobong == 3 || classM == 6 && hobong == 3
@@ -178,6 +190,24 @@ namespace MilitarySimulation
                 Console.WriteLine("\n소지금이 부족하셔서 더 이상 게임을 하실수 없습니다ㅠㅠ\n");
             }
             Console.ResetColor(); // 콘솔 텍스트 색상을 초기화
+        }
+        static void SaveGameDataToCSV()
+        {
+            string filePath = "game_data.csv";
+
+            // CSV 파일 생성 및 헤더 작성
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.WriteLine("Event,횟수"); // CSV 파일 헤더 작성
+
+                // 각 이벤트의 횟수를 CSV에 작성
+                writer.WriteLine($"성공 횟수,{successfulReinforcements}");
+                writer.WriteLine($"실패 횟수,{failedReinforcements}");
+                writer.WriteLine($"불명예 횟수,{dishonorableDischarges}");
+                writer.WriteLine($"강등 횟수,{demotions}");
+                writer.WriteLine($"진급 누락 횟수,{promotionMisses}");
+            }
+            Console.WriteLine("게임 데이터가 CSV 파일로 저장되었습니다.");
         }
         static void DrawBorder()
         {
