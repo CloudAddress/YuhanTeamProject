@@ -139,7 +139,7 @@ namespace MilitarySimulation
             }
             Console.WriteLine("┘");
         }
-        static void Test()
+        static void ArmyClass() // 이병~대장 
         {
             if (classM == 0)//계급)(이병)
             {
