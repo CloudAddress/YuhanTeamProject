@@ -1,0 +1,14 @@
+D:\YuhanTeamProject-main\YuhanTeamProject-main\MilitarySimulation\MilitarySimulation\bin\Debug\net8.0\MilitarySimulation.exe
+D:\YuhanTeamProject-main\YuhanTeamProject-main\MilitarySimulation\MilitarySimulation\bin\Debug\net8.0\MilitarySimulation.deps.json
+D:\YuhanTeamProject-main\YuhanTeamProject-main\MilitarySimulation\MilitarySimulation\bin\Debug\net8.0\MilitarySimulation.runtimeconfig.json
+D:\YuhanTeamProject-main\YuhanTeamProject-main\MilitarySimulation\MilitarySimulation\bin\Debug\net8.0\MilitarySimulation.dll
+D:\YuhanTeamProject-main\YuhanTeamProject-main\MilitarySimulation\MilitarySimulation\bin\Debug\net8.0\MilitarySimulation.pdb
+D:\YuhanTeamProject-main\YuhanTeamProject-main\MilitarySimulation\MilitarySimulation\obj\Debug\net8.0\MilitarySimulation.GeneratedMSBuildEditorConfig.editorconfig
+D:\YuhanTeamProject-main\YuhanTeamProject-main\MilitarySimulation\MilitarySimulation\obj\Debug\net8.0\MilitarySimulation.AssemblyInfoInputs.cache
+D:\YuhanTeamProject-main\YuhanTeamProject-main\MilitarySimulation\MilitarySimulation\obj\Debug\net8.0\MilitarySimulation.AssemblyInfo.cs
+D:\YuhanTeamProject-main\YuhanTeamProject-main\MilitarySimulation\MilitarySimulation\obj\Debug\net8.0\MilitarySimulation.csproj.CoreCompileInputs.cache
+D:\YuhanTeamProject-main\YuhanTeamProject-main\MilitarySimulation\MilitarySimulation\obj\Debug\net8.0\MilitarySimulation.dll
+D:\YuhanTeamProject-main\YuhanTeamProject-main\MilitarySimulation\MilitarySimulation\obj\Debug\net8.0\refint\MilitarySimulation.dll
+D:\YuhanTeamProject-main\YuhanTeamProject-main\MilitarySimulation\MilitarySimulation\obj\Debug\net8.0\MilitarySimulation.pdb
+D:\YuhanTeamProject-main\YuhanTeamProject-main\MilitarySimulation\MilitarySimulation\obj\Debug\net8.0\MilitarySimulation.genruntimeconfig.cache
+D:\YuhanTeamProject-main\YuhanTeamProject-main\MilitarySimulation\MilitarySimulation\obj\Debug\net8.0\ref\MilitarySimulation.dll
