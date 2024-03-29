@@ -193,10 +193,8 @@ namespace MilitarySimulation
         }
         static void SaveGameDataToCSV()
         {
-            string filePath = "game_data.csv";
-
             // CSV 파일 생성 및 헤더 작성
-            using (StreamWriter writer = new StreamWriter(filePath))
+            using (System.IO.StreamWriter writer = new System.IO.StreamWriter(@"game_data.csv", false, System.Text.Encoding.GetEncoding("utf-8")))
             {
                 writer.WriteLine("Event,횟수"); // CSV 파일 헤더 작성
 
