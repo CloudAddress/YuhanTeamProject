@@ -150,7 +150,7 @@ namespace MilitarySimulation
                     Reinforcement = 0;//강화비용
 
                 }
-                if (hobong == 2)
+                else if (hobong == 2)
                 {
                     salary = 123;//월급
                     Reinforcement = 150;//강화비용
@@ -162,7 +162,7 @@ namespace MilitarySimulation
                 demotion = 0;//강등
                 Destruction = 0;//파괴
             }
-            if (classM == 1)
+            else if (classM == 1)
             {
                 if (hobong == 1)
                 {
@@ -172,7 +172,7 @@ namespace MilitarySimulation
                     application = 98;//성공
                     deducted = 2;//실패
                 }
-                if (hobong == 2)
+                else if (hobong == 2)
                 {
                     salary = 184;//월급
                     promotion = 0;//전급비
@@ -180,7 +180,7 @@ namespace MilitarySimulation
                     application = 96;//성공
                     deducted = 4;//실패
                 }
-                if (hobong == 3)
+                else if (hobong == 3)
                 {
                     salary = 255;//월급
                     promotion = 0;//전급비
@@ -188,7 +188,7 @@ namespace MilitarySimulation
                     application = 94;//성공
                     deducted = 6;//실패
                 }
-                if (hobong == 4)
+                else if (hobong == 4)
                 {
                     salary = 276;//월급
                     promotion = 0;//진급비
@@ -196,7 +196,7 @@ namespace MilitarySimulation
                     application = 92;//성공
                     deducted = 8;//실패
                 }
-                if (hobong == 5)
+                else if (hobong == 5)
                 {
                     salary = 338;//월급
                     promotion = 0;//진급비
@@ -204,7 +204,7 @@ namespace MilitarySimulation
                     application = 90;//성공
                     deducted = 10;//실패
                 }
-                if (hobong == 6)
+                else if (hobong == 6)
                 {
                     salary = 414;//월급
                     promotion = 0;//진급비
@@ -216,7 +216,7 @@ namespace MilitarySimulation
                 demotion = 0;//강등
                 Destruction = 0;//파괴
             }
-            if (classM == 2)//상병
+            else if (classM == 2)//상병
             {
                 if (hobong == 1)
                 {
@@ -226,7 +226,7 @@ namespace MilitarySimulation
                     application = 86;//성공
                     deducted = 14;//실패
                 }
-                if (hobong == 2)
+                else if (hobong == 2)
                 {
                     salary = 621;//월급
                     promotion = 0;//전급비
@@ -234,7 +234,7 @@ namespace MilitarySimulation
                     application = 84;//성공
                     deducted = 16;//실패
                 }
-                if (hobong == 3)
+                else if (hobong == 3)
                 {
                     salary = 761;//월급
                     promotion = 0;//전급비
@@ -242,7 +242,7 @@ namespace MilitarySimulation
                     application = 82;//성공
                     deducted = 18;//실패
                 }
-                if (hobong == 4)
+                else if (hobong == 4)
                 {
                     salary = 932;//월급
                     promotion = 0;//진급비
@@ -250,7 +250,7 @@ namespace MilitarySimulation
                     application = 80;//성공
                     deducted = 20;//실패
                 }
-                if (hobong == 5)
+                else if (hobong == 5)
                 {
                     salary = 1142;//월급
                     promotion = 0;//진급비
@@ -258,7 +258,7 @@ namespace MilitarySimulation
                     application = 78;//성공
                     deducted = 22;//실패
                 }
-                if (hobong == 6)
+                else if (hobong == 6)
                 {
                     salary = 1399;//월급
                     promotion = 0;//진급비
@@ -270,7 +270,7 @@ namespace MilitarySimulation
                 demotion = 0;//강등
                 Destruction = 0;//파괴
             }
-            if (classM == 3)//병장
+            else if (classM == 3)//병장
             {
                 if (hobong == 1)
                 {
@@ -280,7 +280,7 @@ namespace MilitarySimulation
                     application = 74;//성공
                     deducted = 26;//실패
                 }
-                if (hobong == 2)
+                else if (hobong == 2)
                 {
                     salary = 2099;//월급
                     promotion = 0;//전급비
@@ -288,7 +288,7 @@ namespace MilitarySimulation
                     application = 72;//성공
                     deducted = 28;//실패
                 }
-                if (hobong == 3)
+                else if (hobong == 3)
                 {
                     salary = 2571;//월급
                     promotion = 0;//전급비
@@ -296,7 +296,7 @@ namespace MilitarySimulation
                     application = 70;//성공
                     deducted = 30;//실패
                 }
-                if (hobong == 4)
+                else if (hobong == 4)
                 {
                     salary = 3150;//월급
                     promotion = 0;//진급비
@@ -308,7 +308,7 @@ namespace MilitarySimulation
                 demotion = 0;//강등
                 Destruction = 0;//파괴
             }
-            if (classM == 4)//하사
+            else if (classM == 4)//하사
             {
                 if (hobong == 1)
                 {
@@ -320,9 +320,9 @@ namespace MilitarySimulation
                     deducted = 33.2f;//실패
                     demotion = 1;//강등
                 }
-                if (hobong == 2)
+                else if (hobong == 2)
                 {
-                    salary = 5727;//월급
+                    salary = 4727;//월급
                     promotion = 0;//전급비
                     discharge = 0;//전역비
                     Reinforcement = 2920;//강화비용
@@ -330,7 +330,7 @@ namespace MilitarySimulation
                     deducted = 34.1f;//실패
                     demotion = 2.2f;//강등
                 }
-                if (hobong == 3)
+                else if (hobong == 3)
                 {
                     salary = 5791;//월급
                     promotion = 0;//전급비
@@ -342,7 +342,7 @@ namespace MilitarySimulation
                 }
                 Destruction = 0;//파괴
             }
-            if (classM == 5)//중사
+            else if (classM == 5)//중사
             {
                 if (hobong == 1)
                 {
@@ -354,7 +354,7 @@ namespace MilitarySimulation
                     deducted = 36f;//실패
                     demotion = 4.5f;//강등
                 }
-                if (hobong == 2)
+                else if (hobong == 2)
                 {
                     salary = 8689;//월급
                     promotion = 0;//전급비
@@ -364,7 +364,7 @@ namespace MilitarySimulation
                     deducted = 36.8f;//실패
                     demotion = 5.6f;//강등
                 }
-                if (hobong == 3)
+                else if (hobong == 3)
                 {
                     salary = 10645;//월급
                     promotion = 0;//전급비
@@ -376,7 +376,7 @@ namespace MilitarySimulation
                 }
                 Destruction = 0;//파괴
             }
-            if (classM == 5)//상사
+            else if (classM == 6)//상사
             {
                 if (hobong == 1)
                 {
@@ -388,7 +388,7 @@ namespace MilitarySimulation
                     deducted = 38.7f;//실패
                     demotion = 7.9f;//강등
                 }
-                if (hobong == 2)
+                else if (hobong == 2)
                 {
                     salary = 15974;//월급
                     promotion = 0;//전급비
@@ -398,7 +398,7 @@ namespace MilitarySimulation
                     deducted = 39.6f;//실패
                     demotion = 9.1f;//강등
                 }
-                if (hobong == 3)
+                else if (hobong == 3)
                 {
                     salary = 19568;//월급
                     promotion = 0;//전급비
@@ -410,126 +410,159 @@ namespace MilitarySimulation
                 }
                 Destruction = 0;//파괴
             }
-            if (classM == 16) //대장
-            {
-                if (hobong == 1)//호봉
-                {
-                    deducted = 41.1f;//실패 
-                    application = 3.4f;//성공
-                    discharge = 8373767;//전역비
-                    salary = 1700326;//월급
-                    promotion = 3026581;//진급비
-                    Reinforcement = 2374076;//강화비용
-                    demotion = 35.5f;//강등
-                    Destruction = 20;//파괴
-
-                }
-            }
-
-
-            if (classM == 15) //중장
+            else if (classM == 7) //소위
             {
                 if (hobong == 1)
                 {
-                    deducted = 41.6f;//실패
-                    application = 5.6f;//성공
-                    discharge = 6835728;//전역비
-                    salary = 1388021;//월급
-                    promotion = 2470678;//진급비
-                    Reinforcement = 1758575;//강화비용
-                    demotion = 34.4f;//강등
-                    Destruction = 18.5f;//파괴
-
+                    deducted = 41.5f;//실패
+                    application = 47.2f;//성공
+                    discharge = 11049;//전역비
+                    salary = 23970;//월급
+                    promotion = 42667;//진급비
+                    Reinforcement = 17878;//강화비용
+                    demotion = 11.4f;//강등
                 }
-            }
-
-            if (classM == 14) //소장
-            {
-                if (hobong == 1)
-                {
-                    deducted = 42;//실패
-                    application = 7.8f;//성공
-                    discharge = 5580186;//전역비
-                    salary = 1133079;//월급
-                    promotion = 2016880;//진급비
-                    Reinforcement = 1302648;//강화비용
-                    demotion = 33.2f;//강등
-                    Destruction = 17;//파괴
-
-                }
-            }
-
-            if (classM == 13) // 준장
-            {
-                if (hobong == 1)
-                {
-                    deducted = 42.5f;//실패
-                    application = 3.4f;//성공
-                    discharge = 4555254;//전역비
-                    salary = 924962;//월급
-                    promotion = 1646433;//진급비
-                    Reinforcement = 964925;//강화비용
-                    demotion = 32.1f;//강등
-                    Destruction = 15.5f;//파괴
-
-                }
-            }
-
-            if (classM == 12) // 대령
-            {
-                if (hobong == 3)
-                {
-                    deducted = 42.9f;//실패
-                    application = 12.2f;//성공
-                    discharge = 0;//전역비
-                    salary = 0;//월급
-                    promotion = 0;//진급비
-                    Reinforcement = 714759;//강화비용
-                    demotion = 30.9f;//강등
-                    Destruction = 14;//파괴
-
-                }
-
                 else if (hobong == 2)
                 {
-                    deducted = 43.6f;//실패
-                    application = 14.2f;//성공
+                    deducted = 42.3f;//실패
+                    application = 45.2f;//성공
                     discharge = 0;//전역비
-                    salary = 616385;//월급
+                    salary = 29364;//월급
                     promotion = 0;//진급비
-                    Reinforcement = 595632;//강화비용
-                    demotion = 29.8f;//강등
-                    Destruction = 12.5f;//파괴
+                    Reinforcement = 21453;//강화비용
+                    demotion = 12.5f;//강등
                 }
-
-                else if (hobong == 1)
+                else if(hobong == 3)
+                {
+                    deducted = 43.2f;//실패
+                    application = 43.2f;//성공
+                    discharge = 0;//전역비
+                    salary = 35971;//월급
+                    promotion = 0;//진급비
+                    Reinforcement = 25744;//강화비용
+                    demotion = 13.7f;//강등
+                }
+                Destruction = 0;//파괴
+            }
+            else if (classM == 8) // 중위
+            {
+                if (hobong == 1)
                 {
                     deducted = 44.2f;//실패
-                    application = 16.2f;//성공
-                    discharge = 2478017;//전역비
-                    salary = 503171;//월급
-                    promotion = 895645;//진급비
-                    Reinforcement = 496360;//강화비용
-                    demotion = 28.6f;//강등
-                    Destruction = 11;//파괴
+                    application = 41;//성공
+                    discharge = 217006;//전역비
+                    salary = 44064;//월급
+                    promotion = 78434;//진급비
+                    Reinforcement = 34755;//강화비용
+                    demotion = 14.8f;//강등
+                }
+                else if (hobong == 2)
+                {
+                    deducted = 45.1f;//실패
+                    application = 39;//성공
+                    discharge = 0;//전역비
+                    salary = 53978;//월급
+                    promotion = 0;//진급비
+                    Reinforcement = 41705;//강화비용
+                    demotion = 16;//강등
+                }
+                else if(hobong == 3)
+                {
+                    deducted = 45.9f;//실패
+                    application = 37;//성공
+                    discharge = 0;//전역비
+                    salary = 66123;//월급
+                    promotion = 0;//진급비
+                    Reinforcement = 50047;//강화비용
+                    demotion = 20.6f;//강등
+                }
+                Destruction = 0;//파괴
+            }
+            else if (classM == 9) //대위
+            {
+                if (hobong == 1)
+                {
+                    deducted = 47;//실패
+                    application = 34.8f;//성공
+                    discharge = 398914;//전역비
+                    salary = 81001;//월급
+                    promotion = 144182;//진급비
+                    Reinforcement = 67563;//강화비용
+                    demotion = 18.3f;//강등
+                    Destruction = 0;//파괴
+                }
+                else if (hobong == 2)
+                {
+                    deducted = 47.8f;//실패
+                    application = 32.8f;//성공
+                    discharge = 0;//전역비
+                    salary = 99226;//월급
+                    promotion = 0;//진급비
+                    Reinforcement = 81075;//강화비용
+                    demotion = 19.4f;//강등
+                    Destruction = 0;//파괴
+                }
+                else if(hobong == 3)
+                {
+                    deducted = 48.2f;//실패
+                    application = 30.8f;//성공
+                    discharge = 0;//전역비
+                    salary = 121552;//월급
+                    promotion = 121552;//진급비
+                    Reinforcement = 189133;//강화비용
+                    demotion = 20.6f;//강등
+                    Destruction = 0.5f;//파괴
                 }
             }
-
-            if (classM == 11) //중령
+            else if (classM == 10) //소령
             {
-                if (hobong == 3)
+                if (hobong == 1)
                 {
-                    deducted = 44.7f;//실패
-                    application = 18.4f;//성공
-                    discharge = 0;//전역비
-                    salary = 410752;//월급
-                    promotion = 0;//진급비
-                    Reinforcement = 367674;//강화비용
-                    demotion = 27.5f;//강등
-                    Destruction = 9.5f;//파괴
-
+                    deducted = 47.7f;//실패
+                    application = 28.6f;//성공
+                    discharge = 733310;//전역비
+                    salary = 148902;//월급
+                    promotion = 265045;//진급비
+                    Reinforcement = 131342;//강화비용
+                    demotion = 21.7f;//강등
+                    Destruction = 2;//파괴
                 }
-
+                else if (hobong == 2)
+                {
+                    deducted = 47.1f;//실패
+                    application = 26.6f;//성공
+                    discharge = 0;//전역비
+                    salary = 182404;//월급
+                    promotion = 0;//진급비
+                    Reinforcement = 157611;//강화비용
+                    demotion = 22.9f;//강등
+                    Destruction = 3.5f;//파괴
+                }
+                else if (hobong == 3)
+                {
+                    deducted = 46.4f;//실패
+                    application = 24.6f;//성공
+                    discharge = 0;//전역비
+                    salary = 223445;//월급
+                    promotion = 0;//진급비
+                    Reinforcement = 189133;//강화비용
+                    demotion = 24;//강등
+                    Destruction = 5;//파괴
+                }
+            }
+            else if (classM == 11) //중령
+            {
+                if (hobong == 1)
+                {
+                    deducted = 46;//실패
+                    application = 22.4f;//성공
+                    discharge = 1348019;//전역비
+                    salary = 273721;//월급
+                    promotion = 487223;//진급비
+                    Reinforcement = 255329;//강화비용
+                    demotion = 25.2f;//강등
+                    Destruction = 6.5f;//파괴
+                }
                 else if (hobong == 2)
                 {
                     deducted = 45.3f;//실패
@@ -541,182 +574,108 @@ namespace MilitarySimulation
                     demotion = 26.3f;//강등
                     Destruction = 8;//파괴
                 }
-
-                else if (hobong == 1)
+                else if(hobong == 3)
                 {
-                    deducted = 46;//실패
-                    application = 22.4f;//성공
-                    discharge = 1348019;//전역비
-                    salary = 273721;//월급
-                    promotion = 487223;//진급비
-                    Reinforcement = 255329;//강화비용
-                    demotion = 25.2f;//강등
-                    Destruction = 6.5f;//파괴
+                    deducted = 44.7f;//실패
+                    application = 18.4f;//성공
+                    discharge = 0;//전역비
+                    salary = 410752;//월급
+                    promotion = 0;//진급비
+                    Reinforcement = 367674;//강화비용
+                    demotion = 27.5f;//강등
+                    Destruction = 9.5f;//파괴
                 }
             }
-
-            if (classM == 10) //소령
+            else if (classM == 12) // 대령
             {
-                if (hobong == 3)
+                if (hobong == 1)
                 {
-                    deducted = 46.4f;//실패
-                    application = 24.6f;//성공
-                    discharge = 0;//전역비
-                    salary = 223445;//월급
-                    promotion = 0;//진급비
-                    Reinforcement = 189133;//강화비용
-                    demotion = 24;//강등
-                    Destruction = 5;//파괴
-
+                    deducted = 44.2f;//실패
+                    application = 16.2f;//성공
+                    discharge = 2478017;//전역비
+                    salary = 503171;//월급
+                    promotion = 895645;//진급비
+                    Reinforcement = 496360;//강화비용
+                    demotion = 28.6f;//강등
+                    Destruction = 11;//파괴
                 }
-
                 else if (hobong == 2)
                 {
-                    deducted = 47.1f;//실패
-                    application = 26.6f;//성공
+                    deducted = 43.6f;//실패
+                    application = 14.2f;//성공
                     discharge = 0;//전역비
-                    salary = 182404;//월급
+                    salary = 616385;//월급
                     promotion = 0;//진급비
-                    Reinforcement = 157611;//강화비용
-                    demotion = 22.9f;//강등
-                    Destruction = 3.5f;//파괴
-
+                    Reinforcement = 595632;//강화비용
+                    demotion = 29.8f;//강등
+                    Destruction = 12.5f;//파괴
                 }
-
-                else if (hobong == 1)
+                else if (hobong == 3)
                 {
-                    deducted = 47.7f;//실패
-                    application = 28.6f;//성공
-                    discharge = 733310;//전역비
-                    salary = 148902;//월급
-                    promotion = 265045;//진급비
-                    Reinforcement = 131342;//강화비용
-                    demotion = 21.7f;//강등
-                    Destruction = 2;//파괴
+                    deducted = 42.9f;//실패
+                    application = 12.2f;//성공
+                    discharge = 0;//전역비
+                    salary = 755071;//월급
+                    promotion = 0;//진급비
+                    Reinforcement = 714759;//강화비용
+                    demotion = 30.9f;//강등
+                    Destruction = 14;//파괴
                 }
-
-                if (classM == 9) //대위
+            }
+            else if (classM == 13) // 준장
+            {
+                if (hobong == 1)
                 {
-                    if (hobong == 3)
-                    {
-                        deducted = 48.2f;//실패
-                        application = 30.8f;//성공
-                        discharge = 0;//전역비
-                        salary = 121552;//월급
-                        promotion = 121552;//진급비
-                        Reinforcement = 189133;//강화비용
-                        demotion = 20.6f;//강등
-                        Destruction = 0.5f;//파괴
-
-                    }
-
-                    else if (hobong == 2)
-                    {
-                        deducted = 47.8f;//실패
-                        application = 32.8f;//성공
-                        discharge = 0;//전역비
-                        salary = 99226;//월급
-                        promotion = 0;//진급비
-                        Reinforcement = 81075;//강화비용
-                        demotion = 19.4f;//강등
-                        Destruction = 0;//파괴
-                    }
-
-                    else if (hobong == 1)
-                    {
-                        deducted = 47;//실패
-                        application = 34.8f;//성공
-                        discharge = 398914;//전역비
-                        salary = 81001;//월급
-                        promotion = 144182;//진급비
-                        Reinforcement = 67563;//강화비용
-                        demotion = 18.3f;//강등
-                        Destruction = 0;//파괴
-                    }
-
+                    deducted = 42.5f;//실패
+                    application = 3.4f;//성공
+                    discharge = 4555254;//전역비
+                    salary = 924962;//월급
+                    promotion = 1646433;//진급비
+                    Reinforcement = 964925;//강화비용
+                    demotion = 32.1f;//강등
+                    Destruction = 15.5f;//파괴
                 }
-
-                if (classM == 8) // 중위
+            }
+            else if (classM == 14) //소장
+            {
+                if (hobong == 1)
                 {
-                    if (hobong == 3)
-                    {
-
-                        deducted = 45.9f;//실패
-                        application = 37;//성공
-                        discharge = 0;//전역비
-                        salary = 66123;//월급
-                        promotion = 0;//진급비
-                        Reinforcement = 50047;//강화비용
-                        demotion = 20.6f;//강등
-                        Destruction = 0;//파괴
-                    }
-
-                    else if (hobong == 2)
-                    {
-                        deducted = 45.1f;//실패
-                        application = 39;//성공
-                        discharge = 0;//전역비
-                        salary = 53978;//월급
-                        promotion = 0;//진급비
-                        Reinforcement = 41705;//강화비용
-                        demotion = 16;//강등
-                        Destruction = 0;//파괴
-
-                    }
-
-                    else if (hobong == 1)
-                    {
-                        deducted = 44.2f;//실패
-                        application = 41;//성공
-                        discharge = 217006;//전역비
-                        salary = 44064;//월급
-                        promotion = 78434;//진급비
-                        Reinforcement = 34755;//강화비용
-                        demotion = 14.8f;//강등
-                        Destruction = 0;//파괴
-
-                    }
+                    deducted = 42;//실패
+                    application = 7.8f;//성공
+                    discharge = 5580186;//전역비
+                    salary = 1133079;//월급
+                    promotion = 2016880;//진급비
+                    Reinforcement = 1302648;//강화비용
+                    demotion = 33.2f;//강등
+                    Destruction = 17;//파괴
                 }
-
-                if (classM == 7) //소위
+            }
+            else if (classM == 15) //중장
+            {
+                if (hobong == 1)
                 {
-                    if (hobong == 3)
-                    {
-                        deducted = 43.2f;//실패
-                        application = 43.2f;//성공
-                        discharge = 0;//전역비
-                        salary = 35971;//월급
-                        promotion = 0;//진급비
-                        Reinforcement = 25744;//강화비용
-                        demotion = 13.7f;//강등
-                        Destruction = 0;//파괴
-
-                    }
-
-                    else if (hobong == 2)
-                    {
-                        deducted = 42.3f;//실패
-                        application = 45.2f;//성공
-                        discharge = 0;//전역비
-                        salary = 29364;//월급
-                        promotion = 0;//진급비
-                        Reinforcement = 21453;//강화비용
-                        demotion = 12.5f;//강등
-                        Destruction = 0;//파괴
-                    }
-
-                    else if (hobong == 1)
-                    {
-                        deducted = 41.5f;//실패
-                        application = 47.2f;//성공
-                        discharge = 11049;//전역비
-                        salary = 23970;//월급
-                        promotion = 42667;//진급비
-                        Reinforcement = 17878;//강화비용
-                        demotion = 11.4f;//강등
-                        Destruction = 0;//파괴
-
-                    }
+                    deducted = 41.6f;//실패
+                    application = 5.6f;//성공
+                    discharge = 6835728;//전역비
+                    salary = 1388021;//월급
+                    promotion = 2470678;//진급비
+                    Reinforcement = 1758575;//강화비용
+                    demotion = 34.4f;//강등
+                    Destruction = 18.5f;//파괴
+                }
+            }
+            else if (classM == 16) //대장
+            {
+                if (hobong == 1)//호봉
+                {
+                    deducted = 41.1f;//실패 
+                    application = 3.4f;//성공
+                    discharge = 8373767;//전역비
+                    salary = 1700326;//월급
+                    promotion = 3026581;//진급비
+                    Reinforcement = 2374076;//강화비용
+                    demotion = 35.5f;//강등
+                    Destruction = 20;//파괴
                 }
             }
         }
