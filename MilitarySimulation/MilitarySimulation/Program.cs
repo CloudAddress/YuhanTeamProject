@@ -4,6 +4,7 @@ namespace MilitarySimulation
 {
     internal class Program
     {
+
         static Random random = new Random();
         static int gold = 0; // 초기자금(현재 보유금액)
         static int classM = 0; // 군 계급(0=이병)
@@ -18,8 +19,30 @@ namespace MilitarySimulation
         static int salary = 100; //월급
         static string input;
 
+        
+
         static void Main(string[] args)
         {
+            Console.WriteLine("********************************************************************************************************************************************************");
+            Console.WriteLine(" *       *   *     *         *            *      *               ************           *      *   *           *          *");
+            Console.WriteLine("******   *   *     *         *      ************ *                          *          *   *   *   *       *************  *");
+            Console.WriteLine("*  *    *****     ***********        *       *  ********                   *         *     *   *   *         *       *    *");
+            Console.WriteLine("  *     *   *     *         *         *    *    *                          *        *       *  *****           *   *      ******");
+            Console.WriteLine("          *   *     ***********          *      *               ***************    *         * *   *             *        *");
+            Console.WriteLine("       *    *          *                         *                       *                     *   *              *       *");
+            Console.WriteLine("      *       *    *************           *                             *                    *              *************"); 
+            Console.WriteLine("     *         *               *           *                        *                        *   *            *************");
+            Console.WriteLine("       *      *                *           *                        *                      *        *                     *");
+            Console.WriteLine("       *   *                  *           ************              ****************      *        *          *************");
+            Console.WriteLine("          *                                                                                *     *            *");
+            Console.WriteLine("                                                                                              *               **************");
+            Console.WriteLine("**********************************************************************************************************************************************************");
+
+            
+            
+            
+            
+            
             Console.Title = "행복한 군생활";
             //Console.SetWindowSize(100, 40); // 너비 100, 높이 40
             //DrawBorder();
