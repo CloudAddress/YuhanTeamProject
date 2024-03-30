@@ -343,8 +343,8 @@ namespace MilitarySimulation
                 writer.WriteLine($"불명예 횟수,{dishonorableDischarges}");
                 writer.WriteLine($"강등 횟수,{demotions}");
                 writer.WriteLine($"진급 누락 횟수,{promotionMisses}");
-                writer.WriteLine($"최고 계급,{DeadClass}");
-                writer.WriteLine($"최고 호봉,{DeadHobong}");
+                writer.WriteLine($"죽었을 때 계급,{DeadClass}");
+                writer.WriteLine($"죽었을 때 호봉,{DeadHobong}");
             }
         }
         static void DrawBorder()
