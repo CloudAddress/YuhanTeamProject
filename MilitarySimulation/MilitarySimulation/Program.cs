@@ -17,7 +17,6 @@ namespace MilitarySimulation
         static int Reinforcement = 100; // 강화비용
         static float Destruction = 0;//파괴 확률
         static int salary = 100; //월급
-        static string? input;
         static string? classA;//계급 표시
 
         static int successfulReinforcements = 0; // 강화 성공 횟수를 추적하는 변수
@@ -85,10 +84,10 @@ namespace MilitarySimulation
 
             Console.WriteLine(asciiArt);
 
-            //Console.SetWindowSize(100, 120); // 너비 100, 높이 80
+            //Console.SetWindowSize(100, 35); // 너비 100, 높이 80
             //DrawBorder();
 
-            string[] choices = { "심사하기", "_", "게임종료"};
+            string[] choices = {"심사하기", "_", "게임종료"};
             int index = 0;
 
             Console.ReadKey(); // 사용자가 아무 키나 누를 때까지 대기
@@ -133,7 +132,6 @@ namespace MilitarySimulation
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.Write($"{Destruction}%\n\n");
                 Console.ResetColor();
-                Console.WriteLine("1. 심사 하기");
 
                 if (classM == 4 || classM == 5 || classM == 6
                    || classM == 7 || classM == 8 || classM == 9
@@ -180,17 +178,16 @@ namespace MilitarySimulation
             {
                 case 0: // "아이템 강화" 선택
                     ReinforceItem();
-                    Console.ReadKey(); // 실행 후 사용자의 키 입력 대기
                     break;
                 case 1:
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("아직 전역할수 없습니다");
+                    Console.WriteLine("아직 전역할수 없습니다 ^^");
                     Console.ResetColor();
                     break;
                 case 2: // "게임 종료" 선택
                     Console.WriteLine("게임을 종료합니다.");
-                    Console.ReadKey(); // 메시지를 사용자가 읽을 수 있게 잠시 대기
-                    Environment.Exit(0); // 프로그램 종료
+                    Console.ReadKey(); //잠시 대기
+                    Environment.Exit(0); //종료
                     break;
                 default:
                     Console.WriteLine("\n올바른 옵션을 선택하세요.\n");
@@ -275,6 +272,8 @@ namespace MilitarySimulation
                 }
                 else // 성공
                 {
+                    MaxClass = classA;//최대 계급 데이터
+                    MinClass = hobong;//최대 계급 호봉 데이터
                     successfulReinforcements++;//성공 데이터
                     MaxClass = classA;
                     MinClass = hobong;
@@ -308,7 +307,7 @@ namespace MilitarySimulation
         static void SaveGameDataToCSV()
         {
             // CSV 파일 생성 및 헤더 작성
-            using (System.IO.StreamWriter writer = new System.IO.StreamWriter(@"game_data.csv", false, System.Text.Encoding.GetEncoding("utf-8")))
+            using (StreamWriter writer = new StreamWriter(@"game_data.csv", false, System.Text.Encoding.GetEncoding("utf-8")))
             {
                 writer.WriteLine("Event,횟수"); // CSV 파일 헤더 작성
 
