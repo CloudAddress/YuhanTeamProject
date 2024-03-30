@@ -18,20 +18,21 @@ namespace MilitarySimulation
         static float Destruction = 0;//파괴 확률
         static int salary = 100; //월급
         static string? classA;//계급 표시
+        static bool isDischarge=false;
+        static string t="";
+        static bool isD=false;//전역을 눌렀는지 확인후
 
         static int successfulReinforcements = 0; // 강화 성공 횟수를 추적하는 변수
         static int failedReinforcements = 0;     // 강화 실패 횟수를 추적하는 변수
         static int dishonorableDischarges = 0;    // 불명예 전역 횟수를 추적하는 변수
         static int demotions = 0;                // 강등 횟수를 추적하는 변수
         static int promotionMisses = 0;          // 진급 누락 횟수를 추적하는 변수
-        static string MaxClass; // 최대 계급을 추적하는 변수
-        static int MinClass; // 최대 호봉을 추적하는 변수
-
+        static string? DeadClass; //죽었을 때 계급을 추적하는 변수
+        static int DeadHobong; //죽었을 때 호봉을 추적하는 변수
         static void Main(string[] args)
         {
             Console.Title = "행복한 군생활";
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-
             string asciiArt = @"
 ..................~.~....+:.:.........:.....................
 .................~...,:....,......=.....,..,................
@@ -86,16 +87,15 @@ namespace MilitarySimulation
 
             //Console.SetWindowSize(100, 35); // 너비 100, 높이 80
             //DrawBorder();
-
-            string[] choices = {"심사하기", "_", "게임종료"};
             int index = 0;
-
             Console.ReadKey(); // 사용자가 아무 키나 누를 때까지 대기
             Console.Clear(); // 화면 지우기
             while (true)
             {
                 ArmyClass();
-                Console.WriteLine($"현재 계급 : {classA}/{hobong}호봉");
+                Discharge();
+                string[] choices = { "심사하기", t, "게임종료" };
+                Console.WriteLine($"현재 계급 : {classA} / {hobong}호봉");
                 Console.Write($"■ 현재 소지금 : ");
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write($"{gold.ToString("n0")}G");
@@ -133,14 +133,6 @@ namespace MilitarySimulation
                 Console.Write($"{Destruction}%\n\n");
                 Console.ResetColor();
 
-                if (classM == 4 || classM == 5 || classM == 6
-                   || classM == 7 || classM == 8 || classM == 9
-                       || classM == 10 || classM == 11 || classM == 12
-                       || classM == 13 || classM == 14 || classM == 15 && hobong == 1)
-                {
-                    Console.WriteLine("$\"{discharge.ToString(\"n0\")}G\\n");
-                }
-
                 for (int i = 0; i < choices.Length; i++)
                 {
                     if (i == index)
@@ -163,6 +155,15 @@ namespace MilitarySimulation
                         break;
                     case ConsoleKey.Enter:
                         Console.Clear(); // 화면 지우기
+                        if (isD)
+                        {
+                            gold = 0;
+                            gold += discharge;
+                            classM = 0;
+                            hobong = 1;
+                            isD = false;
+                            isDischarge = false;
+                        }
                         ExecuteOption(index);
                         break;
                     default:
@@ -178,12 +179,23 @@ namespace MilitarySimulation
             {
                 case 0: // "아이템 강화" 선택
                     ReinforceItem();
+                    isD = false;
                     break;
                 case 1:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("아직 전역할수 없습니다 ^^");
-                    Console.ResetColor();
-                    break;
+                    if (isDischarge)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine($"전역하시겠습니까 \n지금 전역하시면 :{discharge.ToString("n0")}G 만큼 받을 수 있습니다.\n");
+                        Console.ResetColor();
+                        isD = true;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("아직 전역할수 없습니다 ^^\n(전역은 하사 이상 계급에서 1호봉일때만 가능합니다)");
+                        Console.ResetColor();
+                    }
+                     break;
                 case 2: // "게임 종료" 선택
                     Console.WriteLine("게임을 종료합니다.");
                     Console.ReadKey(); //잠시 대기
@@ -191,8 +203,26 @@ namespace MilitarySimulation
                     break;
                 default:
                     Console.WriteLine("\n올바른 옵션을 선택하세요.\n");
+                    isD = false;
                     Console.ReadKey(); // 사용자의 키 입력 대기
                     break;
+            }
+        }
+        static void Discharge()//전역 선택
+        {
+            if ((classM >= 4 && classM <= 15) && hobong == 1)
+            {
+                isDischarge= true;
+                t = "전역하시겠습니까?";
+                if (isD)
+                {
+                    t = "다시 누르면 전역하십니다. 신중하게 선택하세요";
+                }
+            }
+            else 
+            {
+                isDischarge = false;
+                t = "-";
             }
         }
         static void ReinforceItem()//강화시
@@ -236,15 +266,12 @@ namespace MilitarySimulation
                     }
                     else //강등
                     {
-                        demotions++;//강등 데이터
                         bool demote = random.Next(100) < demotion;
                         Console.ForegroundColor = ConsoleColor.Red;
                         if (demote)
                         {
-                            if (classM == 4 || classM == 5 || classM == 6
-                                || classM == 7 || classM == 8 || classM == 9
-                                 || classM == 10 || classM == 11 || classM == 12
-                                  || classM == 13 || classM == 14 || classM == 15 && hobong == 1)
+                            demotions++;//강등 데이터
+                            if((classM >= 4 && classM <= 15) && hobong == 1)
                             {
                                 Console.WriteLine("\n계급이 강등되었습니다...\n");
                                 classM -= 1;
@@ -272,8 +299,6 @@ namespace MilitarySimulation
                 }
                 else // 성공
                 {
-                    MaxClass = classA;//최대 계급 데이터
-                    MinClass = hobong;//최대 계급 호봉 데이터
                     successfulReinforcements++;//성공 데이터
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     if (classM == 0 && hobong == 2 || classM == 1 && hobong == 6 || classM == 2 && hobong == 6 || classM == 3 && hobong == 4
@@ -293,12 +318,13 @@ namespace MilitarySimulation
                         hobong += 1;
                         Console.WriteLine("\n호봉이 올랐습니다!\n");
                     }
-
                 }
             }
             else
             {
                 Console.WriteLine("\n소지금이 부족하셔서 더 이상 게임을 하실수 없습니다ㅠㅠ\n");
+                DeadClass = classA;//죽기전 계급 데이터
+                DeadHobong = hobong;//죽기전 호봉 데이터
             }
             Console.ResetColor(); // 콘솔 텍스트 색상을 초기화
         }
@@ -315,8 +341,8 @@ namespace MilitarySimulation
                 writer.WriteLine($"불명예 횟수,{dishonorableDischarges}");
                 writer.WriteLine($"강등 횟수,{demotions}");
                 writer.WriteLine($"진급 누락 횟수,{promotionMisses}");
-                writer.WriteLine($"최고 계급,{MaxClass}");
-                writer.WriteLine($"최고 호봉,{MinClass}");
+                writer.WriteLine($"최고 계급,{DeadClass}");
+                writer.WriteLine($"최고 호봉,{DeadHobong}");
             }
         }
         static void DrawBorder()
