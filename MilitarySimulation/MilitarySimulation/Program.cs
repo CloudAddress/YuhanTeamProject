@@ -25,6 +25,8 @@ namespace MilitarySimulation
         static int dishonorableDischarges = 0;    // 불명예 전역 횟수를 추적하는 변수
         static int demotions = 0;                // 강등 횟수를 추적하는 변수
         static int promotionMisses = 0;          // 진급 누락 횟수를 추적하는 변수
+        static string MaxClass; // 최대 계급을 추적하는 변수
+        static int MinClass; // 최대 호봉을 추적하는 변수
 
         static void Main(string[] args)
         {
@@ -274,6 +276,8 @@ namespace MilitarySimulation
                 else // 성공
                 {
                     successfulReinforcements++;//성공 데이터
+                    MaxClass = classA;
+                    MinClass = hobong;
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     if (classM == 0 && hobong == 2 || classM == 1 && hobong == 6 || classM == 2 && hobong == 6 || classM == 3 && hobong == 4
                         || classM == 4 && hobong == 3 || classM == 5 && hobong == 3 || classM == 6 && hobong == 3
@@ -314,6 +318,8 @@ namespace MilitarySimulation
                 writer.WriteLine($"불명예 횟수,{dishonorableDischarges}");
                 writer.WriteLine($"강등 횟수,{demotions}");
                 writer.WriteLine($"진급 누락 횟수,{promotionMisses}");
+                writer.WriteLine($"최고 계급,{MaxClass}");
+                writer.WriteLine($"최고 호봉,{MinClass}");
             }
         }
         static void DrawBorder()
@@ -363,12 +369,14 @@ namespace MilitarySimulation
                     salary = 100;//월급
                     promotion = 0;//전급비
                     Reinforcement = 0;//강화비용
+                    
                 }
                 else if (hobong == 2)
                 {
                     salary = 122;//월급
                     Reinforcement = 150;//강화비용
                     promotion = 500;//진급비
+                    
                 }
                 discharge = 0;//전역비
                 application = 100;//성공
