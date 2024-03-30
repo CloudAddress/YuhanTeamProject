@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Diagnostics.Metrics;
-using System.Formats.Asn1;
 using System.IO;
-using System.Reflection;
 
 namespace MilitarySimulation
 {
@@ -455,7 +452,6 @@ namespace MilitarySimulation
 
                 writer.Write(maxHobong);
                 writer.WriteLine(); // 데이터 줄 바꿈
-           
             }
         }
         static void UpdateMaxValues(int currentClass, int currentHobong)
