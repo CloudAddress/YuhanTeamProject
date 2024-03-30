@@ -300,6 +300,8 @@ namespace MilitarySimulation
                 else // 성공
                 {
                     successfulReinforcements++;//성공 데이터
+                    MaxClass = classA;
+                    MinClass = hobong;
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     if (classM == 0 && hobong == 2 || classM == 1 && hobong == 6 || classM == 2 && hobong == 6 || classM == 3 && hobong == 4
                         || classM == 4 && hobong == 3 || classM == 5 && hobong == 3 || classM == 6 && hobong == 3
@@ -392,12 +394,14 @@ namespace MilitarySimulation
                     salary = 100;//월급
                     promotion = 0;//전급비
                     Reinforcement = 0;//강화비용
+                    
                 }
                 else if (hobong == 2)
                 {
                     salary = 122;//월급
                     Reinforcement = 150;//강화비용
                     promotion = 500;//진급비
+                    
                 }
                 discharge = 0;//전역비
                 application = 100;//성공
