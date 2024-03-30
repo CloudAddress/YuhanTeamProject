@@ -133,6 +133,7 @@ namespace MilitarySimulation
                 Console.Write($"{Destruction}%\n\n");
                 Console.ResetColor();
 
+
                 for (int i = 0; i < choices.Length; i++)
                 {
                     if (i == index)
@@ -157,7 +158,7 @@ namespace MilitarySimulation
                         Console.Clear(); // 화면 지우기
                         if (isD)
                         {
-                            gold = 0;
+                            gold /= 2;
                             gold += discharge;
                             classM = 0;
                             hobong = 1;
@@ -184,8 +185,9 @@ namespace MilitarySimulation
                 case 1:
                     if (isDischarge)
                     {
+                        int SUM = (gold / 2) + discharge; 
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine($"전역하시겠습니까 \n지금 전역하시면 :{discharge.ToString("n0")}G 만큼 받을 수 있습니다.\n");
+                        Console.WriteLine($"전역하시겠습니까 \n지금 전역하시면 : {SUM.ToString("n0")}G 만큼 받을 수 있습니다.\n");
                         Console.ResetColor();
                         isD = true;
                     }
