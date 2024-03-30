@@ -30,9 +30,64 @@ namespace MilitarySimulation
         {
             Console.Title = "행복한 군생활";
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            
-            //Console.SetWindowSize(100, 40); // 너비 100, 높이 40
+
+            string asciiArt = @"
+..................~.~....+:.:.........:.....................
+.................~...,:....,......=.....,..,................
+..............:....,......................:..?:.............
+............,...............................................
+.........................:=+????+=:.........................
+..................,IIIIIIIIIIIIIII???????...................
+...............,IIIIIIIIIIIIIIIIIIIIII?????I...~............
+...........=..IIIIIIIIIIIIIIIIIIIIIIIIII?????,..............
+.............IIIIIIIIIII,:IIIIIII==IIIIII?????..............
+.............IIIIIIIIIIIII,IIIII.IIIIIIIII????,.............
+..........:.IIIIIIIIIIII,,IIIIIII++IIIIIIII????.............
+............IIIIIIIIIII:7~.IIIII.?7.IIIIIIII???.:...........
+...........IIIIIIIIIIIII7..IIIII..77IIIIIIIII???............
+...........IIIIIIIIIIIII~:+IIIIII.?IIIIIIIIIII??............
+..........IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII??............
+..........IIIIIIIIIIIIIIIIIII=...~IIIIIIIIIIIIIII+.?:+......
+.....III,IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII~IIIII??.I???I.....
+...,IIII=IIIIIII.~IIIIIIIIIIIIIIIIIIIIIII.IIIIII?~???II?....
+...I=,=I?IIIIIII+?777=.:?IIIIIIIIII=,.:7+.=IIIII????~I?I,...
+...+II:IIIIIIIIII.=:7 77777777 77777777.~IIIIIII???,???~....
+....IIII?IIIIIIII:+?+??~..:+?I77I+,.~++?.IIIIIII????I??.....
+.....???.IIIIIIIII~++++++++++++++++++++=IIIIIIII??:?I.......
+.......:.IIIIIIIII.++++++++++++++++++++.IIIIIII??:..........
+.......~,,,IIIIIIII,++++++++++++++++++,IIIIIIII?I...........
+.....,.IIII:.IIIIII?+++++++++++++++++??IIIIIII??............
+....,+IIIIII~:IIIIII?++++.~?????=.++?=IIIIIII??.............
+....~,IIIIIII,IIIIIIII.??????????++=?IIIIIII?.,.............
+.......IIIIII,..IIIIIII?,???????++.IIIIIII?+................
+......=,IIII=,+II:,IIIIIII:.,,..=IIIIIII?~..................
+.......,IIIIIIIIIII,.~IIIIIIIIIIIIIII?,:....................
+.......,IIIIIIIIII?,:::=..~?IIII?::=~==~.=..................
+......,IIIIIIII,IIIII.=:~===~~==~=,+====~:.~................
+.....,,IIIIIIIIIIIIIII,,============.,==~~:,=...............
+.....,IIIIIIIIIIIIIIII.,==I=======II?.====::~...............
+.....,IIIIIIIIIIIII:..,,=??I+==IIIII?=,=+~~.................
+.....~~IIIIIIIIII,IIIII?:~=++++===II???,+,,:................
+......,IIIIIIIIIIIIIIIII,,,I??I,:,,,,~?+II~=................
+.......,IIIIIIIIIIIIIII,~:,,..,,=~~,,,::,I?,................
+........,?IIIIIIIIII~,+==~~~=====~~:==~~,:,~................
+.........~,,IIIII:.:+====~~~+=====~~,~=~=.,=................
+.................I=======~~~~~~~~=~~=~=~~:~.................
+...............:,==~~~~~:::::::~~===+=~???,.................
+...............,:=~~~~~,~::~:::~==,+=+++=,,.................
+...............,==~~~~~~~::,,.,:~=======~~,.................
+...............,,,:,,,:~~=~:..,~~+==I+~,,:,=................
+.............:,,,,,:::::::,,:..,,:::::::::,,,,=.............
+.........=,,:,,:,::::::::,,...,,,::::::::.:,,::,,:..........
+........,,,:::::::::::::,,,,..:.,,,:::::::::::::,,:.........";
+
+            Console.WriteLine(asciiArt);
+
+            //Console.SetWindowSize(100, 120); // 너비 100, 높이 80
             //DrawBorder();
+
+            string[] choices = { "심사하기", "_", "게임종료"};
+            int index = 0;
 
             Console.ReadKey(); // 사용자가 아무 키나 누를 때까지 대기
             Console.Clear(); // 화면 지우기
@@ -40,7 +95,6 @@ namespace MilitarySimulation
             {
                 ArmyClass();
                 Console.WriteLine($"현재 계급 : {classA}/{hobong}호봉");
-                
                 Console.Write($"■ 현재 소지금 : ");
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write($"{gold.ToString("n0")}G");
@@ -77,30 +131,76 @@ namespace MilitarySimulation
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.Write($"{Destruction}%\n\n");
                 Console.ResetColor();
-                Console.WriteLine("1. 강화 하기");
-                Console.WriteLine("2. 게임 종료");
-                input = Console.ReadLine();
+                Console.WriteLine("1. 심사 하기");
 
-                switch (input)
+                if (classM == 4 || classM == 5 || classM == 6
+                   || classM == 7 || classM == 8 || classM == 9
+                       || classM == 10 || classM == 11 || classM == 12
+                       || classM == 13 || classM == 14 || classM == 15 && hobong == 1)
                 {
-                    case "1":
-                        ReinforceItem();
-                        break;
-                    case "2":
-                        Console.WriteLine("게임을 종료합니다.");
-                        return;
-                    default:
-                        Console.WriteLine("\n올바른 옵션을 선택하세요.\n");
-                        break;
+                    Console.WriteLine("$\"{discharge.ToString(\"n0\")}G\\n");
                 }
-            SaveGameDataToCSV();
+
+                for (int i = 0; i < choices.Length; i++)
+                {
+                    if (i == index)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;//선택된 텍스트 색
+                    }
+                    Console.WriteLine(choices[i]);
+                    Console.ResetColor();
+                }
+                ConsoleKeyInfo keyInfo = Console.ReadKey();
+                switch (keyInfo.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        index = (index - 1 + choices.Length) % choices.Length;
+                        Console.Clear(); // 화면 지우기
+                        break;
+                    case ConsoleKey.DownArrow:
+                        index = (index + 1) % choices.Length;
+                        Console.Clear(); // 화면 지우기
+                        break;
+                    case ConsoleKey.Enter:
+                        Console.Clear(); // 화면 지우기
+                        ExecuteOption(index);
+                        break;
+                    default:
+                        Console.Clear(); // 화면 지우기
+                        break ;
+                }
+                SaveGameDataToCSV();
+            }
+        }
+        static void ExecuteOption(int optionIndex)
+        {
+            switch (optionIndex)
+            {
+                case 0: // "아이템 강화" 선택
+                    ReinforceItem();
+                    Console.ReadKey(); // 실행 후 사용자의 키 입력 대기
+                    break;
+                case 1:
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("아직 전역할수 없습니다");
+                    Console.ResetColor();
+                    break;
+                case 2: // "게임 종료" 선택
+                    Console.WriteLine("게임을 종료합니다.");
+                    Console.ReadKey(); // 메시지를 사용자가 읽을 수 있게 잠시 대기
+                    Environment.Exit(0); // 프로그램 종료
+                    break;
+                default:
+                    Console.WriteLine("\n올바른 옵션을 선택하세요.\n");
+                    Console.ReadKey(); // 사용자의 키 입력 대기
+                    break;
             }
         }
         static void ReinforceItem()//강화시
         {
             Console.Clear(); // 화면 지우기
             //DrawBorder();
-            Console.Write("아이템을 강화합니다");
+            Console.Write("시간이 흐르고 있습니다");
 
             string text = "...."; // 출력할 문자열
 
@@ -116,9 +216,7 @@ namespace MilitarySimulation
                     break;
                 }
             }
-
             bool failed = Reinforce(deducted);
-
             if (gold >= Reinforcement)
             {
                 gold -= Reinforcement;//소지금 차감
@@ -217,7 +315,6 @@ namespace MilitarySimulation
                 writer.WriteLine($"강등 횟수,{demotions}");
                 writer.WriteLine($"진급 누락 횟수,{promotionMisses}");
             }
-            Console.WriteLine("게임 데이터가 CSV 파일로 저장되었습니다.");
         }
         static void DrawBorder()
         {
@@ -263,14 +360,13 @@ namespace MilitarySimulation
                 classA = "⚊ 이병";
                 if (hobong == 1)//호봉
                 {
-                    salary = 200;//월급
+                    salary = 100;//월급
                     promotion = 0;//전급비
                     Reinforcement = 0;//강화비용
-
                 }
                 else if (hobong == 2)
                 {
-                    salary = 245;//월급
+                    salary = 122;//월급
                     Reinforcement = 150;//강화비용
                     promotion = 500;//진급비
                 }
@@ -285,49 +381,49 @@ namespace MilitarySimulation
                 classA = "⚌ 일병";
                 if (hobong == 1)
                 {
-                    salary = 300;//월급
-                    promotion = 0;//전급비
-                    Reinforcement = 188;//강화비용
+                    salary = 149;//월급
+                    promotion = 0;//진급비
+                    Reinforcement = 178;//강화비용
                     application = 98;//성공
                     deducted = 2;//실패
                 }
                 else if (hobong == 2)
                 {
-                    salary = 368;//월급
-                    promotion = 0;//전급비
-                    Reinforcement = 216;//강화비용
+                    salary = 182;//월급
+                    promotion = 0;//진급비
+                    Reinforcement = 198;//강화비용
                     application = 96;//성공
                     deducted = 4;//실패
                 }
                 else if (hobong == 3)
                 {
-                    salary = 450;//월급
+                    salary = 223;//월급
                     promotion = 0;//전급비
-                    Reinforcement = 248;//강화비용
+                    Reinforcement = 228;//강화비용
                     application = 94;//성공
                     deducted = 6;//실패
                 }
                 else if (hobong == 4)
                 {
-                    salary = 552;//월급
+                    salary = 272;//월급
                     promotion = 0;//진급비
-                    Reinforcement = 248;//강화비용
+                    Reinforcement = 262;//강화비용
                     application = 92;//성공
                     deducted = 8;//실패
                 }
                 else if (hobong == 5)
                 {
-                    salary = 676;//월급
+                    salary = 333;//월급
                     promotion = 0;//진급비
-                    Reinforcement = 328;//강화비용
+                    Reinforcement = 302;//강화비용
                     application = 90;//성공
                     deducted = 10;//실패
                 }
                 else if (hobong == 6)
                 {
-                    salary = 828;//월급
-                    promotion = 903;//진급비
-                    Reinforcement = 377;//강화비용
+                    salary = 407;//월급
+                    promotion = 746;//진급비
+                    Reinforcement = 347;//강화비용
                     application = 88;//성공
                     deducted = 12;//실패
                 }
@@ -340,49 +436,49 @@ namespace MilitarySimulation
                 classA = "☰ 상병";
                 if (hobong == 1)
                 {
-                    salary = 1014;//월급
+                    salary = 497;//월급
                     promotion = 0;//진급비
-                    Reinforcement = 471;//강화비용
+                    Reinforcement = 399;//강화비용
                     application = 86;//성공
                     deducted = 14;//실패
                 }
                 else if (hobong == 2)
                 {
-                    salary = 1242;//월급
+                    salary = 608;//월급
                     promotion = 0;//전급비
-                    Reinforcement = 542;//강화비용
+                    Reinforcement = 459;//강화비용
                     application = 84;//성공
                     deducted = 16;//실패
                 }
                 else if (hobong == 3)
                 {
-                    salary = 1522;//월급
+                    salary = 743;//월급
                     promotion = 0;//전급비
-                    Reinforcement = 623;//강화비용
+                    Reinforcement = 528;//강화비용
                     application = 82;//성공
                     deducted = 18;//실패
                 }
                 else if (hobong == 4)
                 {
-                    salary = 1864;//월급
+                    salary = 907;//월급
                     promotion = 0;//진급비
-                    Reinforcement = 717;//강화비용
+                    Reinforcement = 607;//강화비용
                     application = 80;//성공
                     deducted = 20;//실패
                 }
                 else if (hobong == 5)
                 {
-                    salary = 2284;//월급
+                    salary = 1109;//월급
                     promotion = 0;//진급비
-                    Reinforcement = 825;//강화비용
+                    Reinforcement = 698;//강화비용
                     application = 78;//성공
                     deducted = 22;//실패
                 }
                 else if (hobong == 6)
                 {
-                    salary = 2798;//월급
-                    promotion = 3050;//전급비
-                    Reinforcement = 948;//강화비용
+                    salary = 1355;//월급
+                    promotion = 2484;//전급비
+                    Reinforcement = 803;//강화비용
                     application = 76;//성공
                     deducted = 24;//실패
                 }
@@ -395,33 +491,33 @@ namespace MilitarySimulation
                 classA = "𝌆 병장";
                 if (hobong == 1)
                 {
-                    salary = 3427;//월급
+                    salary = 1656;//월급
                     promotion = 0;//진급비
-                    Reinforcement = 1185;//강화비용
+                    Reinforcement = 923;//강화비용
                     application = 74;//성공
                     deducted = 26;//실패
                 }
                 else if (hobong == 2)
                 {
-                    salary = 4198;//월급
+                    salary = 2023;//월급
                     promotion = 0;//전급비
-                    Reinforcement = 1363;//강화비용
+                    Reinforcement = 1061;//강화비용
                     application = 72;//성공
                     deducted = 28;//실패
                 }
                 else if (hobong == 3)
                 {
-                    salary = 5143;//월급
+                    salary = 2473;//월급
                     promotion = 0;//전급비
-                    Reinforcement = 1567;//강화비용
+                    Reinforcement = 1221;//강화비용
                     application = 70;//성공
                     deducted = 30;//실패
                 }
                 else if (hobong == 4)
                 {
-                    salary = 6300;//월급
-                    promotion = 6869;//전급비
-                    Reinforcement = 1803;//강화비용
+                    salary = 3021;//월급
+                    promotion = 5538;//전급비
+                    Reinforcement = 1404;//강화비용
                     application = 68;//성공
                     deducted = 32;//실패
                 }
@@ -434,30 +530,30 @@ namespace MilitarySimulation
                 classA = "v 하사";
                 if (hobong == 1)
                 {
-                    salary = 7718;//월급
+                    salary = 3692;//월급
                     promotion = 0;//진급비
-                    discharge = 19004;//전역비
-                    Reinforcement = 2433;//강화비용
+                    discharge = 15950;//전역비
+                    Reinforcement = 1937;//강화비용
                     application = 65.8f;//성공
                     deducted = 33.2f;//실패
                     demotion = 1;//강등
                 }
                 else if (hobong == 2)
                 {
-                    salary = 9454;//월급
+                    salary = 4512;//월급
                     promotion = 0;//전급비
                     discharge = 0;//전역비
-                    Reinforcement = 2920;//강화비용
+                    Reinforcement = 2518;//강화비용
                     application = 63.8f;//성공
                     deducted = 34.1f;//실패
                     demotion = 2.2f;//강등
                 }
                 else if (hobong == 3)
                 {
-                    salary = 11581;//월급
-                    promotion = 12626;//전급비
+                    salary = 5513;//월급
+                    promotion = 10106;//진급비
                     discharge = 0;//전역비
-                    Reinforcement = 3504;//강화비용
+                    Reinforcement = 3274;//강화비용
                     application = 61.8f;//성공
                     deducted = 34.9f;//실패
                     demotion = 3.3f;//강등
@@ -469,30 +565,30 @@ namespace MilitarySimulation
                 classA = "vv 중사";
                 if (hobong == 1)
                 {
-                    salary = 14187;//월급
-                    promotion = 0;//전급비
-                    discharge = 34934;//전역비
-                    Reinforcement = 4731;//강화비용
+                    salary = 6737;//월급
+                    promotion = 0;//진급비
+                    discharge = 29106;//전역비
+                    Reinforcement = 4518;//강화비용
                     application = 59.6f;//성공
                     deducted = 36f;//실패
                     demotion = 4.5f;//강등
                 }
                 else if (hobong == 2)
                 {
-                    salary = 17379;//월급
+                    salary = 8233;//월급
                     promotion = 0;//전급비
                     discharge = 0;//전역비
-                    Reinforcement = 5677;//강화비용
+                    Reinforcement = 5873;//강화비용
                     application = 57.6f;//성공
                     deducted = 36.8f;//실패
                     demotion = 5.6f;//강등
                 }
                 else if (hobong == 3)
                 {
-                    salary = 21289;//월급
-                    promotion = 23211;//전급비
+                    salary = 10061;//월급
+                    promotion = 18442;//진급비
                     discharge = 0;//전역비
-                    Reinforcement = 6812;//강화비용
+                    Reinforcement = 7635;//강화비용
                     application = 55.6f;//성공
                     deducted = 37.7f;//실패
                     demotion = 6.8f;//강등
@@ -504,30 +600,30 @@ namespace MilitarySimulation
                 classA = "vvv 상사";
                 if (hobong == 1)
                 {
-                    salary = 26079;//월급
+                    salary = 12294;//월급
                     promotion = 0;//전급비
-                    discharge = 36250;//전역비
-                    Reinforcement = 9196;//강화비용
+                    discharge = 53112;//전역비
+                    Reinforcement = 10536;//강화비용
                     application = 53.4f;//성공
                     deducted = 38.7f;//실패
                     demotion = 7.9f;//강등
                 }
                 else if (hobong == 2)
                 {
-                    salary = 31947;//월급
+                    salary = 15024;//월급
                     promotion = 0;//전급비
                     discharge = 0;//전역비
-                    Reinforcement = 11036;//강화비용
+                    Reinforcement = 13697;//강화비용
                     application = 51.4f;//성공
                     deducted = 39.6f;//실패
                     demotion = 9.1f;//강등
                 }
                 else if (hobong == 3)
                 {
-                    salary = 39135;//월급
-                    promotion = 42667;//진급비
+                    salary = 18359;//월급
+                    promotion = 33642;//진급비
                     discharge = 0;//전역비
-                    Reinforcement = 13243;//강화비용
+                    Reinforcement = 17805;//강화비용
                     application = 49.4f;//성공
                     deducted = 40.4f;//실패
                     demotion = 10.2f;//강등
@@ -539,32 +635,32 @@ namespace MilitarySimulation
                 classA = "♦ 소위";
                 if (hobong == 1)
                 {
-                    salary = 47941;//월급
-                    promotion = 0;//전급비
+                    salary = 22435;//월급
+                    promotion = 0;//진급비
                     deducted = 41.5f;//실패
                     application = 47.2f;//성공
-                    discharge = 118049;//전역비
-                    Reinforcement = 17878;//강화비용
+                    discharge = 96918;//전역비
+                    Reinforcement = 24572;//강화비용
                     demotion = 11.4f;//강등
                 }
                 else if (hobong == 2)
                 {
-                    salary = 58727;//월급
+                    salary = 27415;//월급
                     promotion = 0;//진급비
                     deducted = 42.3f;//실패
                     application = 45.2f;//성공
                     discharge = 0;//전역비
-                    Reinforcement = 21453;//강화비용
+                    Reinforcement = 31943;//강화비용
                     demotion = 12.5f;//강등
                 }
                 else if(hobong == 3)
                 {
-                    salary = 71941;//월급
-                    promotion = 78434;//진급비
+                    salary = 33502;//월급
+                    promotion = 61408;//진급비
                     deducted = 43.2f;//실패
                     application = 43.2f;//성공
                     discharge = 0;//전역비
-                    Reinforcement = 25744;//강화비용
+                    Reinforcement = 41526;//강화비용
                     demotion = 13.7f;//강등
                 }
                 Destruction = 0;//파괴
@@ -574,32 +670,32 @@ namespace MilitarySimulation
                 classA = "♦♦ 중위";
                 if (hobong == 1)
                 {
-                    salary = 88128;//월급
+                    salary = 40939;//월급
                     promotion = 0;//진급비
                     deducted = 44.2f;//실패
                     application = 41;//성공
-                    discharge = 217006;//전역비
-                    Reinforcement = 34755;//강화비용
+                    discharge = 176856;//전역비
+                    Reinforcement = 95069;//강화비용
                     demotion = 14.8f;//강등
                 }
                 else if (hobong == 2)
                 {
-                    salary = 107956;//월급
+                    salary = 50027;//월급
                     promotion = 0;//진급비
                     deducted = 45.1f;//실패
                     application = 39;//성공
                     discharge = 0;//전역비
-                    Reinforcement = 41705;//강화비용
+                    Reinforcement = 74498;//강화비용
                     demotion = 16;//강등
                 }
                 else if(hobong == 3)
                 {
-                    salary = 132247;//월급
-                    promotion = 0;//진급비
+                    salary = 61133;//월급
+                    promotion = 112058;//진급비
                     deducted = 45.9f;//실패
                     application = 37;//성공
                     discharge = 0;//전역비
-                    Reinforcement = 50047;//강화비용
+                    Reinforcement = 96847;//강화비용
                     demotion = 17.1f;//강등
                 }
                 Destruction = 0;//파괴
@@ -609,34 +705,34 @@ namespace MilitarySimulation
                 classA = "♦♦♦ 대위";
                 if (hobong == 1)
                 {
-                    salary = 162002;//월급
+                    salary = 74705;//월급
                     promotion = 0;//진급비
                     deducted = 47;//실패
                     application = 34.8f;//성공
-                    discharge = 398914;//전역비
-                    Reinforcement = 67563;//강화비용
+                    Reinforcement = 133649;//강화비용
+                    discharge = 322726;//전역비
                     demotion = 18.3f;//강등
                     Destruction = 0;//파괴
                 }
                 else if (hobong == 2)
                 {
-                    salary = 198453;//월급
+                    salary = 91290;//월급
                     promotion = 0;//진급비
                     deducted = 47.8f;//실패
                     application = 32.8f;//성공
                     discharge = 0;//전역비
-                    Reinforcement = 81075;//강화비용
+                    Reinforcement = 173743;//강화비용
                     demotion = 19.4f;//강등
                     Destruction = 0;//파괴
                 }
                 else if(hobong == 3)
                 {
-                    salary = 243105;//월급
-                    promotion = 265045;//진급비
+                    salary = 111556;//월급
+                    promotion = 204482;//진급비
                     deducted = 48.2f;//실패
                     application = 30.8f;//성공
                     discharge = 0;//전역비
-                    Reinforcement = 97971;//강화비용
+                    Reinforcement = 225866;//강화비용
                     demotion = 20.6f;//강등
                     Destruction = 0.5f;//파괴
                 }
@@ -646,34 +742,34 @@ namespace MilitarySimulation
                 classA = "✷ 소령";
                 if (hobong == 1)
                 {
-                    salary = 297803;//월급
+                    salary = 136321;//월급
                     promotion = 0;//진급비
                     deducted = 47.7f;//실패
                     application = 28.6f;//성공
-                    discharge = 733310;//전역비
-                    Reinforcement = 131342;//강화비용
+                    discharge = 588908;//전역비
+                    Reinforcement = 195692;//강화비용
                     demotion = 21.7f;//강등
                     Destruction = 2;//파괴
                 }
                 else if (hobong == 2)
                 {
-                    salary = 364809;//월급
+                    salary = 166585;//월급
                     promotion = 0;//진급비
                     deducted = 47.1f;//실패
                     application = 26.6f;//성공
                     discharge = 0;//전역비
-                    Reinforcement = 157611;//강화비용
+                    Reinforcement = 405204;//강화비용
                     demotion = 22.9f;//강등
                     Destruction = 3.5f;//파괴
                 }
                 else if (hobong == 3)
                 {
-                    salary = 446891;//월급
-                    promotion = 487223;//진급비
+                    salary = 203566;//월급
+                    promotion = 373137;//진급비
                     deducted = 46.4f;//실패
                     application = 24.6f;//성공
                     discharge = 0;//전역비
-                    Reinforcement = 189133;//강화비용
+                    Reinforcement = 526765;//강화비용
                     demotion = 24;//강등
                     Destruction = 5;//파괴
                 }
@@ -683,34 +779,34 @@ namespace MilitarySimulation
                 classA = "✷✷ 중령";
                 if (hobong == 1)
                 {
-                    salary = 547441;//월급
+                    salary = 248758;//월급
                     promotion = 0;//진급비
                     deducted = 46;//실패
                     application = 22.4f;//성공
-                    discharge = 1348019;//전역비
-                    Reinforcement = 255329;//강화비용
+                    discharge = 11074634;//전역비
+                    Reinforcement = 726936;//강화비용
                     demotion = 25.2f;//강등
                     Destruction = 6.5f;//파괴
                 }
                 else if (hobong == 2)
                 {
-                    salary = 670615;//월급
+                    salary = 303982;//월급
                     promotion = 0;//진급비
                     deducted = 45.3f;//실패
                     application = 20.4f;//성공
                     discharge = 0;//전역비
-                    Reinforcement = 306395;//강화비용
+                    Reinforcement = 945017;//강화비용
                     demotion = 26.3f;//강등
                     Destruction = 8;//파괴
                 }
                 else if(hobong == 3)
                 {
-                    salary = 821504;//월급
-                    promotion = 895645;//진급비
+                    salary = 371466;//월급
+                    promotion = 680898;//진급비
                     deducted = 44.7f;//실패
                     application = 18.4f;//성공
                     discharge = 0;//전역비
-                    Reinforcement = 367674;//강화비용
+                    Reinforcement = 1228522;//강화비용
                     demotion = 27.5f;//강등
                     Destruction = 9.5f;//파괴
                 }
@@ -720,34 +816,34 @@ namespace MilitarySimulation
                 classA = "✷✷✷ 대령";
                 if (hobong == 1)
                 {
-                    salary = 1006342;//월급
+                    salary = 453932;//월급
                     promotion = 0;//진급비
                     deducted = 44.2f;//실패
                     application = 16.2f;//성공
-                    discharge = 2478017;//전역비
-                    Reinforcement = 496360;//강화비용
+                    discharge = 1960986;//전역비
+                    Reinforcement = 1695361;//강화비용
                     demotion = 28.6f;//강등
                     Destruction = 11;//파괴
                 }
                 else if (hobong == 2)
                 {
-                    salary = 1232769;//월급
+                    salary = 554705;//월급
                     promotion = 0;//진급비
                     deducted = 43.6f;//실패
                     application = 14.2f;//성공
                     discharge = 0;//전역비
-                    Reinforcement = 595632;//강화비용
+                    Reinforcement = 2203969;//강화비용
                     demotion = 29.8f;//강등
                     Destruction = 12.5f;//파괴
                 }
                 else if (hobong == 3)
                 {
-                    salary = 1510142;//월급
-                    promotion = 1646433;//진급비
+                    salary = 677849;//월급
+                    promotion = 1242498;//진급비
                     deducted = 42.9f;//실패
                     application = 12.2f;//성공
                     discharge = 0;//전역비
-                    Reinforcement = 714759;//강화비용
+                    Reinforcement = 2865160;//강화비용
                     demotion = 30.9f;//강등
                     Destruction = 14;//파괴
                 }
@@ -757,12 +853,12 @@ namespace MilitarySimulation
                 classA = "☆ 준장 ☆";
                 if (hobong == 1)
                 {
-                    salary = 1849924;//월급
-                    promotion = 2016880;//진급비
-                    discharge = 4555254;//전역비
+                    salary = 828332;//월급
+                    promotion = 1518332;//진급비
+                    discharge = 4372796;//전역비
                     deducted = 42.5f;//실패
                     application = 10f;//성공
-                    Reinforcement = 964925;//강화비용
+                    Reinforcement = 5456410;//강화비용
                     demotion = 32.1f;//강등
                     Destruction = 15.5f;//파괴
                 }
@@ -772,12 +868,12 @@ namespace MilitarySimulation
                 classA = "☆☆ 소장 ☆☆";
                 if (hobong == 1)
                 {
-                    salary = 2266157;//월급
-                    promotion = 2470678;//진급비
+                    salary = 1012221;//월급
+                    promotion = 1855402;//진급비
                     deducted = 42;//실패
                     application = 7.8f;//성공
-                    discharge = 5580186;//전역비
-                    Reinforcement = 1302648;//강화비용
+                    discharge = 4372796;//전역비
+                    Reinforcement = 5456410;//강화비용
                     demotion = 33.2f;//강등
                     Destruction = 17;//파괴
                 }
@@ -787,12 +883,12 @@ namespace MilitarySimulation
                 classA = "☆☆☆ 중장 ☆☆☆";
                 if (hobong == 1)
                 {
-                    salary = 2776043;//월급
-                    promotion = 3026581;//진급비
+                    salary = 1236934;//월급
+                    promotion = 2267301;//진급비
                     deducted = 41.6f;//실패
                     application = 5.6f;//성공
-                    discharge = 6835728;//전역비
-                    Reinforcement = 1758575;//강화비용
+                    discharge = 3092336;//전역비
+                    Reinforcement = 7529846;//강화비용
                     demotion = 34.4f;//강등
                     Destruction = 18.5f;//파괴
                 }
@@ -802,11 +898,11 @@ namespace MilitarySimulation
                 classA = "☆☆☆☆ 대장 ☆☆☆☆";
                 if (hobong == 1)//호봉
                 {
-                    salary = 3400652;//월급
+                    salary = 1511534;//월급
                     deducted = 41.1f;//실패 
                     application = 3.4f;//성공
-                    discharge = 8373767;//전역비
-                    Reinforcement = 2374076;//강화비용
+                    discharge = 6529826;//전역비
+                    Reinforcement = 10391197;//강화비용
                     demotion = 35.5f;//강등
                     Destruction = 20;//파괴
                 }
