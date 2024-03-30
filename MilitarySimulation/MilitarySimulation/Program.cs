@@ -17,7 +17,6 @@ namespace MilitarySimulation
         static int Reinforcement = 100; // 강화비용
         static float Destruction = 0;//파괴 확률
         static int salary = 100; //월급
-        static string? input;
         static string? classA;//계급 표시
 
         static int successfulReinforcements = 0; // 강화 성공 횟수를 추적하는 변수
@@ -86,7 +85,7 @@ namespace MilitarySimulation
             //Console.SetWindowSize(100, 120); // 너비 100, 높이 80
             //DrawBorder();
 
-            string[] choices = { "심사하기", "_", "게임종료"};
+            string[] choices = {"심사하기", "_", "게임종료"};
             int index = 0;
 
             Console.ReadKey(); // 사용자가 아무 키나 누를 때까지 대기
@@ -131,7 +130,6 @@ namespace MilitarySimulation
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.Write($"{Destruction}%\n\n");
                 Console.ResetColor();
-                Console.WriteLine("1. 심사 하기");
 
                 if (classM == 4 || classM == 5 || classM == 6
                    || classM == 7 || classM == 8 || classM == 9
@@ -178,11 +176,10 @@ namespace MilitarySimulation
             {
                 case 0: // "아이템 강화" 선택
                     ReinforceItem();
-                    Console.ReadKey(); // 실행 후 사용자의 키 입력 대기
                     break;
                 case 1:
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("아직 전역할수 없습니다");
+                    Console.WriteLine("아직 전역할수 없습니다 ^^");
                     Console.ResetColor();
                     break;
                 case 2: // "게임 종료" 선택
