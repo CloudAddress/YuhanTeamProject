@@ -29,6 +29,7 @@ namespace MilitarySimulation
         static int promotionMisses = 0;          // 진급 누락 횟수를 추적하는 변수
         static string? DeadClass; //죽었을 때 계급을 추적하는 변수
         static int DeadHobong; //죽었을 때 호봉을 추적하는 변수
+        static int homedischarges = 0; //전역 횟수 추적변수
         static void Main(string[] args)
         {
             Console.Title = "행복한 군생활";
@@ -94,7 +95,7 @@ namespace MilitarySimulation
             {
                 ArmyClass();
                 Discharge();
-                string[] choices = { "심사하기", t, "게임종료" };
+                string[] choices = { "심사하기", "전역하기", "게임종료" };
                 Console.WriteLine($"현재 계급 : {classA} / {hobong}호봉");
                 Console.Write($"■ 현재 소지금 : ");
                 Console.ForegroundColor = ConsoleColor.Yellow;
@@ -209,6 +210,8 @@ namespace MilitarySimulation
                     Console.ReadKey(); // 사용자의 키 입력 대기
                     break;
             }
+
+            
         }
         static void Discharge()//전역 선택
         {
@@ -219,6 +222,7 @@ namespace MilitarySimulation
                 if (isD)
                 {
                     t = "다시 누르면 전역하십니다. 신중하게 선택하세요";
+                    homedischarges++;//전역횟수 데이터
                 }
             }
             else 
@@ -254,7 +258,7 @@ namespace MilitarySimulation
                 if (failed)//실패
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\n진급의 실패했습니다...\n");
+                    Console.WriteLine("\n진급을 실패했습니다...\n");
                     failedReinforcements++;//실패 데이터
                     bool destroy = random.Next(100) < Destruction;
                     if (destroy) // 파괴(전역)
@@ -312,7 +316,7 @@ namespace MilitarySimulation
                         classM += 1;
                         hobong = 1;
                         gold += promotion + salary;
-                        Console.WriteLine("\n진급의 성공했습니다!\n");
+                        Console.WriteLine("\n진급을 성공했습니다!\n");
                     }
                     else
                     {
@@ -345,6 +349,7 @@ namespace MilitarySimulation
                 writer.WriteLine($"진급 누락 횟수,{promotionMisses}");
                 writer.WriteLine($"최고 계급,{DeadClass}");
                 writer.WriteLine($"최고 호봉,{DeadHobong}");
+                writer.WriteLine($"전역 횟수,{homedischarges}");
             }
         }
         static void DrawBorder()
@@ -940,6 +945,8 @@ namespace MilitarySimulation
                     Destruction = 20;//파괴
                 }
             }
+
+            
         }
     }
 }
