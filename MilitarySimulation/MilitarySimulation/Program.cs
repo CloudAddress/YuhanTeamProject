@@ -24,6 +24,8 @@ namespace MilitarySimulation
         static int dishonorableDischarges = 0;    // 불명예 전역 횟수를 추적하는 변수
         static int demotions = 0;                // 강등 횟수를 추적하는 변수
         static int promotionMisses = 0;          // 진급 누락 횟수를 추적하는 변수
+        static string MaxClass; // 최대 계급을 추적하는 변수
+        static int MinClass; // 최대 호봉을 추적하는 변수
 
         static void Main(string[] args)
         {
@@ -82,7 +84,7 @@ namespace MilitarySimulation
 
             Console.WriteLine(asciiArt);
 
-            //Console.SetWindowSize(100, 120); // 너비 100, 높이 80
+            //Console.SetWindowSize(100, 35); // 너비 100, 높이 80
             //DrawBorder();
 
             string[] choices = {"심사하기", "_", "게임종료"};
@@ -184,8 +186,8 @@ namespace MilitarySimulation
                     break;
                 case 2: // "게임 종료" 선택
                     Console.WriteLine("게임을 종료합니다.");
-                    Console.ReadKey(); // 메시지를 사용자가 읽을 수 있게 잠시 대기
-                    Environment.Exit(0); // 프로그램 종료
+                    Console.ReadKey(); //잠시 대기
+                    Environment.Exit(0); //종료
                     break;
                 default:
                     Console.WriteLine("\n올바른 옵션을 선택하세요.\n");
@@ -270,6 +272,8 @@ namespace MilitarySimulation
                 }
                 else // 성공
                 {
+                    MaxClass = classA;//최대 계급 데이터
+                    MinClass = hobong;//최대 계급 호봉 데이터
                     successfulReinforcements++;//성공 데이터
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     if (classM == 0 && hobong == 2 || classM == 1 && hobong == 6 || classM == 2 && hobong == 6 || classM == 3 && hobong == 4
@@ -301,7 +305,7 @@ namespace MilitarySimulation
         static void SaveGameDataToCSV()
         {
             // CSV 파일 생성 및 헤더 작성
-            using (System.IO.StreamWriter writer = new System.IO.StreamWriter(@"game_data.csv", false, System.Text.Encoding.GetEncoding("utf-8")))
+            using (StreamWriter writer = new StreamWriter(@"game_data.csv", false, System.Text.Encoding.GetEncoding("utf-8")))
             {
                 writer.WriteLine("Event,횟수"); // CSV 파일 헤더 작성
 
@@ -311,6 +315,8 @@ namespace MilitarySimulation
                 writer.WriteLine($"불명예 횟수,{dishonorableDischarges}");
                 writer.WriteLine($"강등 횟수,{demotions}");
                 writer.WriteLine($"진급 누락 횟수,{promotionMisses}");
+                writer.WriteLine($"최고 계급,{MaxClass}");
+                writer.WriteLine($"최고 호봉,{MinClass}");
             }
         }
         static void DrawBorder()
