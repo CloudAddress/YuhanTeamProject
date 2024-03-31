@@ -462,7 +462,7 @@ namespace MilitarySimulation
                 maxClassK = classA;
                 maxHobong = currentHobong;
             }
-            else if (currentClass == maxClass && currentHobong > maxHobong)
+            else if (currentClass == maxClass && currentHobong >= maxHobong)
             {
                 maxHobong = currentHobong;
             }
