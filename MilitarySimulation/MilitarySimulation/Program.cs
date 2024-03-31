@@ -142,7 +142,7 @@ namespace MilitarySimulation
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.Write($"{Destruction}%\n\n");
                 Console.ResetColor();
-                Console.WriteLine("방향키로 이동하고 엔테로 선택하세요.");
+                Console.WriteLine("방향키로 이동하고 엔터로 선택하세요.");
                 DeadClass = classA;//끝났을때 계급 데이터(또는 강제로 껐을때도)
                 DeadHobong = hobong;//끝났을때 계급 데이터(또는 강제로 껐을때도)
 
