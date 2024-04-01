@@ -343,11 +343,11 @@ namespace MilitarySimulation
                 {
                     successfulReinforcements++;//성공 데이터
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    if (classM == 0 && hobong == 2 || classM == 1 && hobong == 6 || classM == 2 && hobong == 6 || classM == 3 && hobong == 4
-                        || classM == 4 && hobong == 3 || classM == 5 && hobong == 3 || classM == 6 && hobong == 3
-                         || classM == 7 && hobong == 3 || classM == 8 && hobong == 3 || classM == 9 && hobong == 3
-                          || classM == 10 && hobong == 3 || classM == 11 && hobong == 3 || classM == 12 && hobong == 3
-                           || classM == 13 && hobong == 1 || classM == 14 && hobong == 1 || classM == 15 && hobong == 1)
+                    if ((classM == 0 && hobong == 2) || (classM == 1 && hobong == 6) || (classM == 2 && hobong == 6) || (classM == 3 && hobong == 4)
+                        || (classM == 4 && hobong == 3) || (classM == 5 && hobong == 3) || (classM == 6 && hobong == 3)
+                         || (classM == 7 && hobong == 3) || (classM == 8 && hobong == 3) || (classM == 9 && hobong == 3)
+                          || (classM == 10 && hobong == 3) || (classM == 11 && hobong == 3) || (classM == 12 && hobong == 3)
+                           || (classM == 13 && hobong == 1) || (classM == 14 && hobong == 1) || (classM == 15 && hobong == 1))
                     {
                         classM += 1;
                         hobong = 1;
