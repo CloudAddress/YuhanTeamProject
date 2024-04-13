@@ -1,10 +1,20 @@
-﻿using System;
+﻿using Google.Apis.Sheets.v4;
+using System;
 using System.IO;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.Sheets.v4.Data;
+using Google.Apis.Services;
+using Google.Apis.Util.Store;
 
 namespace MilitarySimulation
 {
     internal class Program
     {
+        //static string[] Scopes = { SheetsService.Scope.Spreadsheets };
+        //static string ApplicationName = "Google Sheets API .NET Quickstart";
+        //static string spreadsheetId = "1p50xWTnwnkgJ39GXWiBEs0SySnp-NlUMpxY05YWduoE"; // 스프레드시트 ID 입력
+
+
         static Random random = new Random();
         static int gold = 100; // 초기자금(현재 보유금액)
         static int classM = 0; // 군 계급(0=이병)
@@ -38,8 +48,15 @@ namespace MilitarySimulation
         static int maxClass = 0; // 최고 계급을 저장할 변수
         static string maxClassK = "⚊ 이병";
         static int maxHobong = 0; // 최고 호봉을 저장할 변수
+        static int[,] successC = new int[15,2];//계급별 성공
+        static int[,] failedC = new int[15, 2];//계급별 실패
+        static int[,] dishonorableDischargesC = new int[15, 2]; //계급별 불명예
+        static int[,] demotionsC = new int[15, 2];//계급별 강등
+        static int[,] promotionMissesC = new int[15, 2]; //계급별 진급 누락
+
         static void Main(string[] args)
         {
+
             Console.Title = "행복한 군생활";
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit);
@@ -143,6 +160,7 @@ namespace MilitarySimulation
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.Write($"{Destruction}%\n\n");
                 Console.ResetColor();
+                Console.WriteLine("이 게임은 현실과 많이 다릅니다.");
                 Console.WriteLine("방향키로 이동하고 엔터로 선택하세요.");
                 DeadClass = classA;//끝났을때 계급 데이터(또는 강제로 껐을때도)
                 DeadHobong = hobong;//끝났을때 계급 데이터(또는 강제로 껐을때도)
@@ -199,7 +217,6 @@ namespace MilitarySimulation
                         isD = true;
                         if (isa)//전역하기
                         {
-                            
                             gold += discharge;
                             classM = 0;
                             hobong = 1;
@@ -241,7 +258,70 @@ namespace MilitarySimulation
                     break;
             }
         }
-        static void Discharge()//전역 선택
+        //public static void SaveGameDataToGoogleSheets(object? sender)
+        //{
+        //    // 데이터 준비
+        //    Dictionary<string, object> data = new Dictionary<string, object>
+        //    {
+        //        { "성공 횟수", successfulReinforcements },
+        //        { "실패 횟수", failedReinforcements },
+        //        { "불명예 횟수", dishonorableDischarges },
+        //        { "강등 횟수", demotions },
+        //        { "진급 누락 횟수", promotionMisses },
+        //        { "끝났을 때 계급", DeadClass },
+        //        { "끝났을 때 호봉", DeadHobong },
+        //        { "전역 횟수", homedischarges },
+        //        { "실제 시작 시간", startTime },
+        //        { "실제 종료 시간", DateTime.Now },
+        //        { "플레이 시간(초)", (DateTime.Now - startTime).TotalSeconds },
+        //        { "소지금이 부족한 상태에서 연타한 횟수", fool },
+        //        { "다시한 횟수", re },
+        //        { "최고 계급", maxClassK },
+        //        { "최고 호봉", maxHobong },
+        //    };
+
+        //    // 데이터를 구글 스프레드시트에 업로드
+        //    UploadDataToSpreadsheet(data);
+        //}
+        //static void UploadDataToSpreadsheet(Dictionary<string, object> data)
+        //{
+        //    UserCredential credential;
+
+        //    // 사용자 인증 정보 가져오기
+        //    using (var stream = new FileStream("able-study-420211-411d8f297671.json", FileMode.Open, FileAccess.Read))
+        //    {
+        //        string credPath = "token.json";
+        //        credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+        //            GoogleClientSecrets.Load(stream).Secrets,
+        //            Scopes,
+        //            "user",
+        //            CancellationToken.None,
+        //            new FileDataStore(credPath, true)).Result;
+        //        Console.WriteLine("Credential file saved to: " + credPath);
+        //    }
+
+        //    // 스프레드시트 서비스 초기화
+        //    var service = new SheetsService(new BaseClientService.Initializer()
+        //    {
+        //        HttpClientInitializer = credential,
+        //        ApplicationName = ApplicationName,
+        //    });
+
+        //    // 데이터 준비
+        //    List<IList<object>> values = new List<IList<object>>();
+        //    foreach (var item in data)
+        //    {
+        //        values.Add(new List<object> { item.Key, item.Value });
+        //    }
+
+        //    // 데이터 업로드
+        //    ValueRange valueRange = new ValueRange { Values = values };
+        //    SpreadsheetsResource.ValuesResource.AppendRequest request =
+        //        service.Spreadsheets.Values.Append(valueRange, spreadsheetId, "A1");
+        //    request.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
+        //    var response = request.Execute();
+        //}
+    static void Discharge()//전역 선택
         {
             if ((classM >= 4 && classM <= 15) && hobong == 1)
             {
@@ -296,10 +376,12 @@ namespace MilitarySimulation
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("\n진급을 실패했습니다...\n");
                     failedReinforcements++;//실패 데이터
+                    failedC[classM, hobong - 1]++;
                     bool destroy = random.Next(100) < Destruction;
                     if (destroy) // 파괴(전역)
                     {
                         dishonorableDischarges++; // 불명예 전역 데이터
+                        dishonorableDischargesC[classM, hobong - 1]++;
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\n불명예 전역이...\n");
                         classM = 0;
@@ -313,7 +395,8 @@ namespace MilitarySimulation
                         if (demote)
                         {
                             demotions++;//강등 데이터
-                            if((classM >= 4 && classM <= 15) && hobong == 1)
+                            demotionsC[classM, hobong - 1]++;
+                            if ((classM >= 4 && classM <= 15) && hobong == 1)
                             {
                                 Console.WriteLine("\n계급이 강등되었습니다...\n");
                                 classM -= 1;
@@ -329,6 +412,7 @@ namespace MilitarySimulation
                             else
                             {
                                 promotionMisses++; //진급 누락 데이터 
+                                promotionMissesC[classM, hobong - 1]++;
                                 Console.WriteLine("\n진급 누락되었습니다...\n");
                                 hobong -= 1;
                             }
@@ -338,6 +422,7 @@ namespace MilitarySimulation
                 else // 성공
                 {
                     successfulReinforcements++;//성공 데이터
+                    successC[classM,hobong-1]++;
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     if ((classM >= 0 && classM <= 12) && hobong == 2 || (classM >= 13 && classM <= 16) && hobong == 1)
                     {
@@ -364,7 +449,9 @@ namespace MilitarySimulation
         }
         static void CurrentDomain_ProcessExit(object? sender, EventArgs e)
         {
-           SaveGameDataToCSV(sender);
+            //SaveGameDataToGoogleSheets(sender);
+            SaveGameDataToCSV(sender);
+            SaveGameDataToCSV2(sender);
             Console.WriteLine("게임 데이터가 CSV 파일에 저장되었습니다.");
         }
         static void SaveGameDataToCSV(object? sender)
@@ -420,7 +507,7 @@ namespace MilitarySimulation
                 writer.Write(DeadHobong);
                 writer.Write(",");
 
-                
+
                 writer.Write(homedischarges);
                 writer.Write(",");
 
@@ -443,10 +530,125 @@ namespace MilitarySimulation
                 writer.Write(",");
 
                 writer.Write(maxHobong);
-                writer.WriteLine(); // 데이터 줄 바꿈
+                writer.Write(",");
+
+                writer.WriteLine();
             }
         }
-        static void UpdateMaxValues(int currentClass, int currentHobong)
+        static void SaveGameDataToCSV2(object? sender)
+        {
+            bool appendHeader = !File.Exists(@"game_data2.csv");
+            // CSV 파일 생성 및 헤더 작성
+            using (StreamWriter writer = new StreamWriter(@"game_data2.csv", true, System.Text.Encoding.GetEncoding("utf-8")))
+            {
+                if (appendHeader)
+                {
+                    writer.Write("계급,");
+                    writer.Write("이병 1,");
+                    writer.Write("이병 2,");
+                    writer.Write("일병 1,");
+                    writer.Write("일병 2,");
+                    writer.Write("상병 1,");
+                    writer.Write("상병 2,");
+                    writer.Write("병장 1,");
+                    writer.Write("병장 2,");
+                    writer.Write("하사 1,");
+                    writer.Write("하사 2,");
+                    writer.Write("중사 1,");
+                    writer.Write("중사 2,");
+                    writer.Write("상사 1,");
+                    writer.Write("상사 2,");
+                    writer.Write("소위 1,");
+                    writer.Write("소위 2,");
+                    writer.Write("중위 1,");
+                    writer.Write("중위 2,");
+                    writer.Write("대위 1,");
+                    writer.Write("대위 2,");
+                    writer.Write("소령 1,");
+                    writer.Write("소령 2,");
+                    writer.Write("중령 1,");
+                    writer.Write("중령 2,");
+                    writer.Write("대령 1,");
+                    writer.Write("대령 2,");
+                    writer.Write("준장  1,");
+                    writer.Write("소장  1,");
+                    writer.Write("중장  1,");
+                    writer.Write("대장  1,");
+                    writer.WriteLine();
+
+                }
+                writer.Write("성공,");
+                // 데이터를 가로 방향으로 추가
+                for (int i = 0; i < successC.GetLength(0); i++)
+                {
+                    for (int j = 0; j < successC.GetLength(1); j++)
+                    {
+                        writer.Write(successC[i, j]);
+                        // 각 행의 마지막 요소가 아닌 경우 쉼표 추가
+                        if (i != successC.GetLength(0) - 1 || j < successC.GetLength(1) - 1)
+                            writer.Write(",");
+                    }
+                }
+                writer.WriteLine();
+
+                writer.Write("실패,");
+                // 데이터를 가로 방향으로 추가
+                for (int i = 0; i < failedC.GetLength(0); i++)
+                {
+                    for (int j = 0; j < failedC.GetLength(1); j++)
+                    {
+                        writer.Write(failedC[i, j]);
+                        // 각 행의 마지막 요소가 아닌 경우 쉼표 추가
+                        if (i != failedC.GetLength(0) - 1 || j < failedC.GetLength(1) - 1)
+                            writer.Write(",");
+                    }
+                }
+                writer.WriteLine();
+
+                writer.Write("불명예,");
+                // 데이터를 가로 방향으로 추가
+                for (int i = 0; i < dishonorableDischargesC.GetLength(0); i++)
+                {
+                    for (int j = 0; j < dishonorableDischargesC.GetLength(1); j++)
+                    {
+                        writer.Write(dishonorableDischargesC[i, j]);
+                        // 각 행의 마지막 요소가 아닌 경우 쉼표 추가
+                        if (i != dishonorableDischargesC.GetLength(0) - 1 || j < dishonorableDischargesC.GetLength(1) - 1)
+                            writer.Write(",");
+                    }
+                }
+                writer.WriteLine();
+
+                writer.Write("강등,");
+                // 데이터를 가로 방향으로 추가
+                for (int i = 0; i < demotionsC.GetLength(0); i++)
+                {
+                    for (int j = 0; j < demotionsC.GetLength(1); j++)
+                    {
+                        writer.Write(demotionsC[i, j]);
+                        // 각 행의 마지막 요소가 아닌 경우 쉼표 추가
+                        if (i != demotionsC.GetLength(0) - 1 || j < demotionsC.GetLength(1) - 1)
+                            writer.Write(",");
+                    }
+                }
+                writer.WriteLine();
+
+                writer.Write("진급누락,");
+                // 데이터를 가로 방향으로 추가
+                for (int i = 0; i < promotionMissesC.GetLength(0); i++)
+                {
+                    for (int j = 0; j < promotionMissesC.GetLength(1); j++)
+                    {
+                        writer.Write(promotionMissesC[i, j]);
+                        // 각 행의 마지막 요소가 아닌 경우 쉼표 추가
+                        if (i != promotionMissesC.GetLength(0) - 1 || j < promotionMissesC.GetLength(1) - 1)
+                            writer.Write(",");
+                    }
+                }
+                writer.WriteLine();
+            }
+        }
+            static void UpdateMaxValues(int currentClass, int currentHobong)
         {
             // 현재 계급이 최고 계급보다 높을 경우에만 업데이트
             if (currentClass > maxClass)
@@ -466,7 +668,6 @@ namespace MilitarySimulation
         }
         static void ArmyClass() // 이병~대장 
         {
-
             if (classM == 0)//계급)(이병)
             {
                 classA = "⚊ 이병";
