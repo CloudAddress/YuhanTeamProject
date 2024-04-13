@@ -561,7 +561,7 @@ namespace MilitarySimulation
                 {
                     salary = 497;//월급
                     promotion = 0;//진급비
-                    discharge = 2148;//전역비
+                    discharge = 4276;//전역비
                     Reinforcement = 388;//강화비용
                     deducted = 25.9;//실패
                     demotion = 1;//강등
@@ -585,7 +585,7 @@ namespace MilitarySimulation
                 {
                     salary = 743;//월급
                     promotion = 0;//진급비
-                    discharge = 3208;//전역비
+                    discharge = 6386;//전역비
                     Reinforcement = 559;//강화비용
                     deducted = 33.3;//실패
                     demotion = 3.3f;//강등
@@ -609,7 +609,7 @@ namespace MilitarySimulation
                 {
                     salary = 1109;//월급
                     promotion = 0;//전급비
-                    discharge = 4790;//전역비
+                    discharge = 9536;//전역비
                     Reinforcement = 805;//강화비용
                     deducted = 40.7;//실패
                     demotion = 5.6f;//강등
@@ -633,7 +633,7 @@ namespace MilitarySimulation
                 {
                     salary = 1656;//월급
                     promotion = 0;//진급비
-                    discharge = 7153;//전역비
+                    discharge = 14240;//전역비
                     Reinforcement = 1159;//강화비용
                     deducted = 48.1;//실패
                     demotion = 7.9f;//강등
@@ -657,7 +657,7 @@ namespace MilitarySimulation
                 {
                     salary = 2473;//월급
                     promotion = 0;//진급비
-                    discharge = 7153;//전역비
+                    discharge = 21264;//전역비
                     Reinforcement = 1669;//강화비용
                     deducted = 55.5;//실패
                     demotion = 10.2f;//강등
@@ -681,7 +681,7 @@ namespace MilitarySimulation
                 {
                     salary = 3692;//월급
                     promotion = 0;//진급비
-                    discharge = 15950;//전역비
+                    discharge = 31753;//전역비
                     Reinforcement = 2403;//강화비용
                     deducted = 62.9;//실패
                     demotion = 12.5f;//강등
@@ -706,7 +706,7 @@ namespace MilitarySimulation
                 {
                     salary = 5513;//월급
                     promotion = 0;//진급비
-                    discharge = 23818;//전역비
+                    discharge = 47416;//전역비
                     Reinforcement = 3461;//강화비용
                     deducted = 70.3;//실패
                     demotion = 14.8f;//강등
@@ -731,7 +731,7 @@ namespace MilitarySimulation
                 {
                     salary = 8233;//월급
                     promotion = 0;//진급비
-                    discharge = 35567;//전역비
+                    discharge = 70805;//전역비
                     Reinforcement = 4984;//강화비용
                     deducted = 77.7;//실패
                     demotion = 17.1f;//강등
@@ -756,7 +756,7 @@ namespace MilitarySimulation
                 {
                     salary = 12294;//월급
                     promotion = 0;//진급비
-                    discharge = 53112;//전역비
+                    discharge = 105732;//전역비
                     Reinforcement = 7177;//강화비용
                     deducted = 85.1;//실패
                     demotion = 19.4f;//강등
@@ -781,7 +781,7 @@ namespace MilitarySimulation
                 {
                     salary = 18359;//월급
                     promotion = 33652;//진급비
-                    discharge = 79311;//전역비
+                    discharge = 157888;//전역비
                     Reinforcement = 10335;//강화비용
                     deducted = 92.5;//실패
                     demotion = 21.7f;//강등
@@ -795,7 +795,7 @@ namespace MilitarySimulation
                 {
                     salary = 22435;//월급
                     promotion = 41123;//진급비
-                    discharge = 96918;//전역비
+                    discharge = 192939;//전역비
                     Reinforcement = 12402;//강화비용
                     deducted = 96.2;//실패
                     demotion = 22.9f;//강등
@@ -809,7 +809,7 @@ namespace MilitarySimulation
                 {
                     salary = 27415;//월급
                     promotion = 50252;//진급비
-                    discharge = 118434;//전역비
+                    discharge = 235772;//전역비
                     Reinforcement = 14882;//강화비용
                     deducted = 99.9;//실패
                     demotion = 24f;//강등
@@ -823,7 +823,7 @@ namespace MilitarySimulation
                 {
                     salary = 33502;//월급
                     promotion = 0;//진급비
-                    discharge = 144727;//전역비
+                    discharge = 288113;//전역비
                     Reinforcement = 1000;//강화비용
                     deducted = 99.9922;//실패
                     demotion = 0f;//강등
