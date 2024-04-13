@@ -5,14 +5,15 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Sheets.v4.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using Newtonsoft.Json;
 
 namespace MilitarySimulation
 {
     internal class Program
     {
-        //static string[] Scopes = { SheetsService.Scope.Spreadsheets };
-        //static string ApplicationName = "Google Sheets API .NET Quickstart";
-        //static string spreadsheetId = "1p50xWTnwnkgJ39GXWiBEs0SySnp-NlUMpxY05YWduoE"; // 스프레드시트 ID 입력
+        static string[] Scopes = { SheetsService.Scope.Spreadsheets };
+        static string ApplicationName = "Google Sheets API .NET Quickstart";
+        static string spreadsheetId = "1SsmD7rkzEyfjcUod4zDmn3dZFED_l4PY2zP_8IXZgOQ"; // 스프레드시트 ID 입력
 
 
         static Random random = new Random();
@@ -53,6 +54,7 @@ namespace MilitarySimulation
         static int[,] dishonorableDischargesC = new int[15, 2]; //계급별 불명예
         static int[,] demotionsC = new int[15, 2];//계급별 강등
         static int[,] promotionMissesC = new int[15, 2]; //계급별 진급 누락
+
 
         static void Main(string[] args)
         {
@@ -258,70 +260,75 @@ namespace MilitarySimulation
                     break;
             }
         }
-        //public static void SaveGameDataToGoogleSheets(object? sender)
-        //{
-        //    // 데이터 준비
-        //    Dictionary<string, object> data = new Dictionary<string, object>
-        //    {
-        //        { "성공 횟수", successfulReinforcements },
-        //        { "실패 횟수", failedReinforcements },
-        //        { "불명예 횟수", dishonorableDischarges },
-        //        { "강등 횟수", demotions },
-        //        { "진급 누락 횟수", promotionMisses },
-        //        { "끝났을 때 계급", DeadClass },
-        //        { "끝났을 때 호봉", DeadHobong },
-        //        { "전역 횟수", homedischarges },
-        //        { "실제 시작 시간", startTime },
-        //        { "실제 종료 시간", DateTime.Now },
-        //        { "플레이 시간(초)", (DateTime.Now - startTime).TotalSeconds },
-        //        { "소지금이 부족한 상태에서 연타한 횟수", fool },
-        //        { "다시한 횟수", re },
-        //        { "최고 계급", maxClassK },
-        //        { "최고 호봉", maxHobong },
-        //    };
+        public static void SaveGameDataToGoogleSheets(object? sender)
+        {
+            // 데이터 준비
+            Dictionary<string, object> data = new Dictionary<string, object>
+            {
+                { "성공 횟수", successfulReinforcements },
+                { "실패 횟수", failedReinforcements },
+                { "불명예 횟수", dishonorableDischarges },
+                { "강등 횟수", demotions },
+                { "진급 누락 횟수", promotionMisses },
+                { "끝났을 때 계급", DeadClass },
+                { "끝났을 때 호봉", DeadHobong },
+                { "전역 횟수", homedischarges },
+                { "실제 시작 시간", startTime },
+                { "실제 종료 시간", DateTime.Now },
+                { "플레이 시간(초)", (DateTime.Now - startTime).TotalSeconds },
+                { "소지금이 부족한 상태에서 연타한 횟수", fool },
+                { "다시한 횟수", re },
+                { "최고 계급", maxClassK },
+                { "최고 호봉", maxHobong },
+            };
 
-        //    // 데이터를 구글 스프레드시트에 업로드
-        //    UploadDataToSpreadsheet(data);
-        //}
-        //static void UploadDataToSpreadsheet(Dictionary<string, object> data)
-        //{
-        //    UserCredential credential;
+            // 데이터를 구글 스프레드시트에 업로드
+            UploadDataToSpreadsheet(data);
+        }
+        static void UploadDataToSpreadsheet(Dictionary<string, object> data)
+        {
+            UserCredential credential;
+            
+            // 사용자 인증 정보 가져오기
+            using (var stream =
+                new FileStream("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.json", FileMode.Open, FileAccess.Read))
+            {
+                string credPath = System.Environment.GetFolderPath(
+                    System.Environment.SpecialFolder.Personal);
+                credPath = Path.Combine(credPath, "457455307801-0036gfd20ihjdgs50iterdr82rrkrloo.apps.googleusercontent.com.json");
 
-        //    // 사용자 인증 정보 가져오기
-        //    using (var stream = new FileStream("able-study-420211-411d8f297671.json", FileMode.Open, FileAccess.Read))
-        //    {
-        //        string credPath = "token.json";
-        //        credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-        //            GoogleClientSecrets.Load(stream).Secrets,
-        //            Scopes,
-        //            "user",
-        //            CancellationToken.None,
-        //            new FileDataStore(credPath, true)).Result;
-        //        Console.WriteLine("Credential file saved to: " + credPath);
-        //    }
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                    GoogleClientSecrets.FromStream(stream).Secrets,
+                    Scopes,
+                    "user",
+                    CancellationToken.None,
+                    new FileDataStore(credPath, true)).Result;
+                // Console.WriteLine("Credential file saved to: " + credPath);
+            }
 
-        //    // 스프레드시트 서비스 초기화
-        //    var service = new SheetsService(new BaseClientService.Initializer()
-        //    {
-        //        HttpClientInitializer = credential,
-        //        ApplicationName = ApplicationName,
-        //    });
 
-        //    // 데이터 준비
-        //    List<IList<object>> values = new List<IList<object>>();
-        //    foreach (var item in data)
-        //    {
-        //        values.Add(new List<object> { item.Key, item.Value });
-        //    }
+            // 스프레드시트 서비스 초기화
+            var service = new SheetsService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = ApplicationName,
+            });
 
-        //    // 데이터 업로드
-        //    ValueRange valueRange = new ValueRange { Values = values };
-        //    SpreadsheetsResource.ValuesResource.AppendRequest request =
-        //        service.Spreadsheets.Values.Append(valueRange, spreadsheetId, "A1");
-        //    request.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
-        //    var response = request.Execute();
-        //}
-    static void Discharge()//전역 선택
+            // 데이터 준비
+            List<IList<object>> values = new List<IList<object>>();
+            foreach (var item in data)
+            {
+                values.Add(new List<object> { item.Key, item.Value });
+            }
+
+            // 데이터 업로드
+            ValueRange valueRange = new ValueRange { Values = values };
+            SpreadsheetsResource.ValuesResource.AppendRequest request =
+                service.Spreadsheets.Values.Append(valueRange, spreadsheetId, "A1");
+            request.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
+            var response = request.Execute();
+        }
+        static void Discharge()//전역 선택
         {
             if ((classM >= 4 && classM <= 15) && hobong == 1)
             {
