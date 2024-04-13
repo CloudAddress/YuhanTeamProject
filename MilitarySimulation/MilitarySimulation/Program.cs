@@ -117,7 +117,7 @@ namespace MilitarySimulation
                 Console.ResetColor();
                 Console.Write($"■ 성공 확률   : ");
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.Write($"{application}%");
+                Console.Write($"{application.ToString("f2")}%");
                 Console.ResetColor();
                 Console.Write($"  ■ 실패 확률 : ");
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -504,7 +504,7 @@ namespace MilitarySimulation
                     salary = 182;//월급
                     promotion = 334;//진급비
                     Reinforcement = 138;//강화비용
-                    deducted = 7.3;//실패
+                    deducted = 7.4;//실패
                 }
                 
                 discharge = 0;//전역비
@@ -519,14 +519,14 @@ namespace MilitarySimulation
                     salary = 223;//월급
                     promotion = 0;//진급비
                     Reinforcement = 187;//강화비용
-                    deducted = 11;//실패
+                    deducted = 11.1;//실패
                 }
                 else if (hobong == 2)
                 {
                     salary = 272;//월급
                     promotion = 499;//진급비
                     Reinforcement = 225;//강화비용
-                    deducted = 14.6;//실패
+                    deducted = 14.8;//실패
                 }
                 
                 discharge = 0;//전역비
@@ -541,14 +541,14 @@ namespace MilitarySimulation
                     salary = 333;//월급
                     promotion = 0;//진급비
                     Reinforcement = 270;//강화비용
-                    deducted = 18.3;//실패
+                    deducted = 18.5;//실패
                 }
                 else if (hobong == 2)
                 {
                     salary = 407;//월급
                     promotion = 746;//전급비
                     Reinforcement = 323;//강화비용
-                    deducted = 21.9;//실패
+                    deducted = 22.2;//실패
                 }
                 discharge = 0;//전역비
                 demotion = 0;//강등
@@ -563,7 +563,7 @@ namespace MilitarySimulation
                     promotion = 0;//진급비
                     discharge = 2148;//전역비
                     Reinforcement = 388;//강화비용
-                    deducted = 24.6;//실패
+                    deducted = 25.9;//실패
                     demotion = 1;//강등
                 }
                 else if (hobong == 2)
@@ -572,7 +572,7 @@ namespace MilitarySimulation
                     promotion = 1114;//전급비
                     discharge = 0;//전역비
                     Reinforcement = 466;//강화비용
-                    deducted = 27.1;//실패
+                    deducted = 29.6;//실패
                     demotion = 2.2f;//강등
                 }
                 
@@ -587,7 +587,7 @@ namespace MilitarySimulation
                     promotion = 0;//진급비
                     discharge = 3208;//전역비
                     Reinforcement = 559;//강화비용
-                    deducted = 29.6;//실패
+                    deducted = 33.3;//실패
                     demotion = 3.3f;//강등
                 }
                 else if (hobong == 2)
@@ -596,7 +596,7 @@ namespace MilitarySimulation
                     promotion = 1663;//전급비
                     discharge = 0;//전역비
                     Reinforcement = 671;//강화비용
-                    deducted = 32.1;//실패
+                    deducted = 37;//실패
                     demotion = 4.5f;//강등
                 }
                 
@@ -611,7 +611,7 @@ namespace MilitarySimulation
                     promotion = 0;//전급비
                     discharge = 4790;//전역비
                     Reinforcement = 805;//강화비용
-                    deducted = 34.6;//실패
+                    deducted = 40.7;//실패
                     demotion = 5.6f;//강등
                 }
                 else if (hobong == 2)
@@ -620,7 +620,7 @@ namespace MilitarySimulation
                     promotion = 2484;//전급비
                     discharge = 0;//전역비
                     Reinforcement = 966;//강화비용
-                    deducted = 37.1;//실패
+                    deducted = 44.4;//실패
                     demotion = 6.8f;//강등
                 }
                 
@@ -635,14 +635,14 @@ namespace MilitarySimulation
                     promotion = 0;//진급비
                     discharge = 7153;//전역비
                     Reinforcement = 1159;//강화비용
-                    deducted = 39.6;//실패
+                    deducted = 48.1;//실패
                     demotion = 7.9f;//강등
                 }
                 else if (hobong == 2)
                 {
                     salary = 2023;//월급
                     promotion = 3709;//진급비
-                    deducted = 42.1;//실패
+                    deducted = 51.8;//실패
                     discharge = 0;//전역비
                     Reinforcement = 1391;//강화비용
                     demotion = 9.1f;//강등
@@ -659,7 +659,7 @@ namespace MilitarySimulation
                     promotion = 0;//진급비
                     discharge = 7153;//전역비
                     Reinforcement = 1669;//강화비용
-                    deducted = 44.6;//실패
+                    deducted = 55.5;//실패
                     demotion = 10.2f;//강등
                 }
                 else if (hobong == 2)
@@ -668,7 +668,7 @@ namespace MilitarySimulation
                     promotion = 5538;//진급비
                     discharge = 0;//전역비
                     Reinforcement = 2003;//강화비용
-                    deducted = 47.1;//실패
+                    deducted = 59.2;//실패
                     demotion = 11.4f;//강등
                 }
                 
@@ -683,7 +683,7 @@ namespace MilitarySimulation
                     promotion = 0;//진급비
                     discharge = 15950;//전역비
                     Reinforcement = 2403;//강화비용
-                    deducted = 49.6;//실패
+                    deducted = 62.9;//실패
                     demotion = 12.5f;//강등
                     Destruction = 0;//파괴
                 }
@@ -693,7 +693,7 @@ namespace MilitarySimulation
                     promotion = 8270;//진급비
                     discharge = 0;//전역비
                     Reinforcement = 2884;//강화비용
-                    deducted = 13.7;//실패
+                    deducted = 66.6;//실패
                     demotion = 14.8f;//강등
                     Destruction = 0;//파괴
                 }
@@ -708,7 +708,7 @@ namespace MilitarySimulation
                     promotion = 0;//진급비
                     discharge = 23818;//전역비
                     Reinforcement = 3461;//강화비용
-                    deducted = 53.1;//실패
+                    deducted = 70.3;//실패
                     demotion = 14.8f;//강등
                     Destruction = 1.5f;//파괴
                 }
@@ -718,7 +718,7 @@ namespace MilitarySimulation
                     promotion = 12350;//진급비
                     discharge = 0;//전역비
                     Reinforcement = 4153;//강화비용
-                    deducted = 54.1;//실패
+                    deducted = 74.0;//실패
                     demotion = 16f;//강등
                     Destruction = 3f;//파괴
                 }
@@ -733,7 +733,7 @@ namespace MilitarySimulation
                     promotion = 0;//진급비
                     discharge = 35567;//전역비
                     Reinforcement = 4984;//강화비용
-                    deducted = 55.1;//실패
+                    deducted = 77.7;//실패
                     demotion = 17.1f;//강등
                     Destruction = 4.5f;//파괴
                 }
@@ -743,7 +743,7 @@ namespace MilitarySimulation
                     promotion = 18442;//진급비
                     discharge = 0;//전역비
                     Reinforcement = 5981;//강화비용
-                    deducted = 56.1;//실패
+                    deducted = 81.4;//실패
                     demotion = 18.3f;//강등
                     Destruction = 6;//파괴
                 }
@@ -758,7 +758,7 @@ namespace MilitarySimulation
                     promotion = 0;//진급비
                     discharge = 53112;//전역비
                     Reinforcement = 7177;//강화비용
-                    deducted = 57.1;//실패
+                    deducted = 85.1;//실패
                     demotion = 19.4f;//강등
                     Destruction = 7.5f;//파괴
                 }
@@ -768,7 +768,7 @@ namespace MilitarySimulation
                     promotion = 27539;//진급비
                     discharge = 0;//전역비
                     Reinforcement = 8612;//강화비용
-                    deducted = 58.1;//실패
+                    deducted = 88.8;//실패
                     demotion = 20.6f;//강등
                     Destruction = 9f;//파괴
                 }
@@ -783,7 +783,7 @@ namespace MilitarySimulation
                     promotion = 33652;//진급비
                     discharge = 79311;//전역비
                     Reinforcement = 10335;//강화비용
-                    deducted = 59.1;//실패
+                    deducted = 92.5;//실패
                     demotion = 21.7f;//강등
                     Destruction = 10.5f;//파괴
                 }
@@ -797,7 +797,7 @@ namespace MilitarySimulation
                     promotion = 41123;//진급비
                     discharge = 96918;//전역비
                     Reinforcement = 12402;//강화비용
-                    deducted = 60;//실패
+                    deducted = 96.2;//실패
                     demotion = 22.9f;//강등
                     Destruction = 12;//파괴
                 }
@@ -811,7 +811,7 @@ namespace MilitarySimulation
                     promotion = 50252;//진급비
                     discharge = 118434;//전역비
                     Reinforcement = 14882;//강화비용
-                    deducted = 62.4;//실패
+                    deducted = 99.9;//실패
                     demotion = 24f;//강등
                     Destruction = 13.5f;//파괴
                 }
