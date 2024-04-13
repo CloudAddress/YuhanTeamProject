@@ -192,14 +192,14 @@ namespace MilitarySimulation
                 case 1:
                     if (isDischarge)
                     {
-                        int SUM = (gold / 2) + discharge; 
+                        double SUM = gold + discharge; 
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine($"전역하시겠습니까 \n지금 전역하시면 : {SUM.ToString("n0")}G 만큼 받을 수 있습니다.\n");
                         Console.ResetColor();
                         isD = true;
                         if (isa)//전역하기
                         {
-                            gold /= 2;
+                            
                             gold += discharge;
                             classM = 0;
                             hobong = 1;
