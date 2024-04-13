@@ -103,6 +103,7 @@ namespace MilitarySimulation
             {
                 ArmyClass();
                 Discharge();
+                UpdateMaxValues(classM, hobong);
                 string[] choices = { "심사하기", t, "게임종료" };
 
                 Console.WriteLine($"현재 계급 : {classA} / {hobong}호봉");
@@ -146,7 +147,6 @@ namespace MilitarySimulation
                 DeadClass = classA;//끝났을때 계급 데이터(또는 강제로 껐을때도)
                 DeadHobong = hobong;//끝났을때 계급 데이터(또는 강제로 껐을때도)
 
-                UpdateMaxValues(classM, hobong);
                 for (int i = 0; i < choices.Length; i++)
                 {
                     if (i == index)
@@ -321,13 +321,9 @@ namespace MilitarySimulation
                                 {
                                     hobong = 1;
                                 }
-                                else if (classM == 4)
-                                {
-                                    hobong = 4;
-                                }
-                                else
-                                {
-                                    hobong = 3;
+                                else 
+                                { 
+                                    hobong = 2;
                                 }
                             }
                             else
@@ -343,7 +339,7 @@ namespace MilitarySimulation
                 {
                     successfulReinforcements++;//성공 데이터
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    if ((classM >= 0 && classM <= 12) && hobong == 2 || (classM >= 13 && classM <= 16) && hobong == 1 )
+                    if ((classM >= 0 && classM <= 12) && hobong == 2 || (classM >= 13 && classM <= 16) && hobong == 1)
                     {
                         classM += 1;
                         hobong = 1;
@@ -485,7 +481,6 @@ namespace MilitarySimulation
                     salary = 122;//월급
                     Reinforcement = 100;//강화비용
                     promotion = 200;//진급비
-                    
                 }
                 discharge = 0;//전역비
                 application = 100;//성공
@@ -561,8 +556,6 @@ namespace MilitarySimulation
                     application = 78.1f;//성공
                     deducted = 21.9f;//실패
                 }
-                
-                
                 discharge = 0;//전역비
                 demotion = 0;//강등
                 Destruction = 0;//파괴
@@ -860,7 +853,7 @@ namespace MilitarySimulation
                     discharge = 144727;//전역비
                     Reinforcement = 1000;//강화비용
                     application = 0.0077f;//성공
-                    deducted = 0f;//실패
+                    deducted = 99.9922f;//실패
                     demotion = 0f;//강등
                     Destruction = 0.0001f;//파괴
                 }
