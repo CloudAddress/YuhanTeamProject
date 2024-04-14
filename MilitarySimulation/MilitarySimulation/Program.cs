@@ -447,9 +447,9 @@ namespace MilitarySimulation
         }
         static void CurrentDomain_ProcessExit(object? sender, EventArgs e)
         {
-            SaveGameDataToGoogleSheets(sender);
-            SaveGameDataToCSV(sender);
             SaveGameDataToCSV2(sender);
+            SaveGameDataToCSV(sender);
+            SaveGameDataToGoogleSheets(sender);
             Console.WriteLine("게임 데이터가 CSV 파일에 저장되었습니다.");
         }
         static void SaveGameDataToCSV(object? sender)
