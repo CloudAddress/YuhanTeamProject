@@ -53,6 +53,7 @@ namespace MilitarySimulation
         static int[,] dishonorableDischargesC = new int[17, 2]; //계급별 불명예
         static int[,] demotionsC = new int[17, 2];//계급별 강등
         static int[,] promotionMissesC = new int[17, 2]; //계급별 진급 누락
+        static int[,] homedischargesC = new int[17, 2]; //계급별 전역
 
         static void Main(string[] args)
         {
@@ -283,6 +284,7 @@ namespace MilitarySimulation
                         isD = true;
                         if (isa)//전역하기
                         {
+                            homedischargesC[classM, hobong - 1]++;
                             gold += discharge;
                             classM = 0;
                             hobong = 1;
@@ -712,6 +714,20 @@ namespace MilitarySimulation
                         {
                             writer.Write(promotionMissesC[i, j]);
                             if (i != promotionMissesC.GetLength(0) - 1 || j < promotionMissesC.GetLength(1) - 1)
+                                writer.Write(",");
+                        }
+                    }
+                }
+                writer.WriteLine();
+                writer.Write("전역,");
+                for (int i = 0; i < homedischargesC.GetLength(0); i++)
+                {
+                    for (int j = 0; j < homedischargesC.GetLength(1); j++)
+                    {
+                        if (!(i >= 13 && j == 1))
+                        {
+                            writer.Write(homedischargesC[i, j]);
+                            if (i != homedischargesC.GetLength(0) - 1 || j < homedischargesC.GetLength(1) - 1)
                                 writer.Write(",");
                         }
                     }
