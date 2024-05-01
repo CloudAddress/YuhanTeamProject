@@ -53,6 +53,7 @@ namespace MilitarySimulation
         static int[,] dishonorableDischargesC = new int[17, 2]; //계급별 불명예
         static int[,] demotionsC = new int[17, 2];//계급별 강등
         static int[,] promotionMissesC = new int[17, 2]; //계급별 진급 누락
+        static int[,] homedischargesC = new int[17, 2]; //계급별 전역
 
         static void Main(string[] args)
         {
@@ -283,6 +284,7 @@ namespace MilitarySimulation
                         isD = true;
                         if (isa)//전역하기
                         {
+                            homedischargesC[classM, hobong - 1]++;
                             gold += discharge;
                             classM = 0;
                             hobong = 1;
@@ -353,23 +355,28 @@ namespace MilitarySimulation
         static void UploadDataToSpreadsheet(Dictionary<string, object> data)
         {
             UserCredential credential;
+
             // 사용자 인증 정보 가져오기
             using (var stream = new FileStream("1234.json", FileMode.Open, FileAccess.Read))
             {
+                string credPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+                credPath = Path.Combine(credPath, ".credentials/sheets.googleapis.com-dotnet-quickstart.json");
+
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.FromStream(stream).Secrets,
                     Scopes,
                     "user",
                     CancellationToken.None,
-                    new FileDataStore("MyAppToken",true)).Result;
+                    new FileDataStore(credPath, true)).Result;
             }
+
             // 스프레드시트 서비스 초기화
             var service = new SheetsService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName,
-            }
-            );
+            });
+
             // 데이터 준비
             List<IList<object>> values = new List<IList<object>>();
             foreach (var item in data)
@@ -379,9 +386,9 @@ namespace MilitarySimulation
 
             // 데이터 업로드
             ValueRange valueRange = new ValueRange { Values = values };
-            SpreadsheetsResource.ValuesResource.UpdateRequest request =
-            service.Spreadsheets.Values.Update(valueRange, spreadsheetId, "A1");
-            request.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.RAW;
+            SpreadsheetsResource.ValuesResource.AppendRequest request =
+            service.Spreadsheets.Values.Append(valueRange, spreadsheetId, "A:A");
+            request.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.RAW;
             var response = request.Execute();
         }
         static void Discharge()//전역 선택
@@ -514,7 +521,7 @@ namespace MilitarySimulation
         {
             SaveGameDataToCSV2(sender);
             SaveGameDataToCSV(sender);
-            //SaveGameDataToGoogleSheets(sender);
+            SaveGameDataToGoogleSheets(sender);
             Console.WriteLine("게임 데이터가 CSV 파일에 저장되었습니다.");
         }
         static void SaveGameDataToCSV(object? sender)
@@ -712,6 +719,20 @@ namespace MilitarySimulation
                         {
                             writer.Write(promotionMissesC[i, j]);
                             if (i != promotionMissesC.GetLength(0) - 1 || j < promotionMissesC.GetLength(1) - 1)
+                                writer.Write(",");
+                        }
+                    }
+                }
+                writer.WriteLine();
+                writer.Write("전역,");
+                for (int i = 0; i < homedischargesC.GetLength(0); i++)
+                {
+                    for (int j = 0; j < homedischargesC.GetLength(1); j++)
+                    {
+                        if (!(i >= 13 && j == 1))
+                        {
+                            writer.Write(homedischargesC[i, j]);
+                            if (i != homedischargesC.GetLength(0) - 1 || j < homedischargesC.GetLength(1) - 1)
                                 writer.Write(",");
                         }
                     }
