@@ -6,14 +6,13 @@ using Google.Apis.Sheets.v4.Data;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using Newtonsoft.Json;
+using System.Net;
+using System.Text;
 
 namespace MilitarySimulation
 {
     internal class Program
     {
-        static string[] Scopes = { SheetsService.Scope.Spreadsheets };
-        static string ApplicationName = "Google Sheets API .NET Quickstart";
-        static string spreadsheetId = "1WlyMq736es2dXdzm7m2dsXyPAaTpJwJFb6rFBOPkM5k"; // 스프레드시트 ID 입력
         private static string playerIdFilePath = "playerid.txt"; // 파일 경로
 
         static Random random = new Random();
@@ -349,91 +348,67 @@ namespace MilitarySimulation
                     break;
             }
         }
-        public static void SaveGameDataToGoogleSheets(object? sender)
+        public static void SaveGameDataToGoogleSheets()
         {
-            string playerID = GetPlayerId();
-            // 데이터 준비
-            Dictionary<string, object> data = new Dictionary<string, object>
+            try
             {
-                { "플레이어 ID", playerID },
-                { "실제 시작 시간", startTime },
-                { "실제 종료 시간", DateTime.Now },
-                { "플레이 시간(초)", (DateTime.Now - startTime).TotalSeconds },
-                { "전체 성공 횟수", successfulReinforcements },
-                { "전체 실패 횟수", failedReinforcements },
-                { "전체 불명예 횟수", dishonorableDischarges },
-                { "전체 강등 횟수", demotions },
-                { "전체 진급 누락 횟수", promotionMisses },
-                { "전체 끝났을 때 계급", DeadClass },
-                { "전체 끝났을 때 호봉", DeadHobong },
-                { "전체 전역 횟수", homedischarges },
-                { "소지금이 부족한 상태에서 연타한 횟수", fool },
-                { "다시한 횟수", re },
-                { "최고 계급", maxClassK },
-                { "최고 호봉", maxHobong },
-            };
-            // 헤더와 데이터를 각각 리스트로 변환
-            List<object> header = new List<object>();
-            List<object> values = new List<object>();
+                string playerID = GetPlayerId();
+                // 데이터 준비
+                Dictionary<string, object> data = new Dictionary<string, object>
+                {
+                    { "플레이어 ID", playerID },
+                    { "실제 시작 시간", startTime },
+                    { "실제 종료 시간", DateTime.Now },
+                    { "플레이 시간(초)", (DateTime.Now - startTime).TotalSeconds },
+                    { "전체 성공 횟수", successfulReinforcements },
+                    { "전체 실패 횟수", failedReinforcements },
+                    { "전체 불명예 횟수", dishonorableDischarges },
+                    { "전체 강등 횟수", demotions },
+                    { "전체 진급 누락 횟수", promotionMisses },
+                    { "전체 끝났을 때 계급", DeadClass },
+                    { "전체 끝났을 때 호봉", DeadHobong },
+                    { "전체 전역 횟수", homedischarges },
+                    { "소지금이 부족한 상태에서 연타한 횟수", fool },
+                    { "다시한 횟수", re },
+                    { "최고 계급", maxClassK },
+                    { "최고 호봉", maxHobong },
+                };
 
-            foreach (var item in data)
-            {
-                header.Add(item.Key);
-                values.Add(item.Value);
+                // URL
+                string url = "https://script.google.com/macros/s/AKfycbyo1VGqXHZT4oi3_VdsXnZ3tya2rgnT1qiK-rk_VgsZAMZ_T4PiEIkfkfP08YkWsVqd/exec";
+
+                // 데이터를 URL 인코딩하여 문자열로 만듭니다.
+                StringBuilder dataString = new StringBuilder();
+                foreach (var item in data)
+                {
+                    dataString.Append($"{Uri.EscapeDataString(item.Key)}={Uri.EscapeDataString(item.Value.ToString())}&");
+                }
+
+                // 마지막 '&' 문자를 제거합니다.
+                dataString.Length--;
+
+                // WebClient 생성
+                using (WebClient client = new WebClient())
+                {
+                    // 요청 헤더 설정 (선택 사항)
+                    client.Headers.Add("Content-Type", "application/x-www-form-urlencoded");
+
+                    // POST 요청 보내기
+                    byte[] responseBytes = client.UploadData(url, "POST", Encoding.UTF8.GetBytes(dataString.ToString()));
+
+                    // 응답 바이트를 문자열로 변환
+                    string response = Encoding.UTF8.GetString(responseBytes);
+
+                    // 응답 확인 (선택 사항)
+                    Console.WriteLine(response);
+                }
             }
-            // 데이터를 구글 스프레드시트에 업로드
-            UploadDataToSpreadsheet(header, values);
-        }
-        
-        static void UploadDataToSpreadsheet(List<object> header, List<object> values)
-        {
-            UserCredential credential;
-
-            // 사용자 인증 정보 가져오기
-            using (var stream = new FileStream("1234.json", FileMode.Open, FileAccess.Read))
+            catch (Exception ex)
             {
-                string credPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-                credPath = Path.Combine(credPath, ".credentials/sheets.googleapis.com-dotnet-quickstart.json");
-
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.FromStream(stream).Secrets,
-                    Scopes,
-                    "user",
-                    CancellationToken.None,
-                    new FileDataStore(credPath, true)).Result;
+                Console.WriteLine($"오류 발생: {ex.Message}");
             }
-
-            // 스프레드시트 서비스 초기화
-            var service = new SheetsService(new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = credential,
-                ApplicationName = ApplicationName,
-            });
-            // 데이터 준비
-            List<IList<object>> dataToUpload = new List<IList<object>>();
-            if(IsFirstRowEmpty(service))
-            {
-                dataToUpload.Add(header); // 헤더 추가
-            }
-            dataToUpload.Add(values); // 데이터 추가
-
-
-            ValueRange valueRange = new ValueRange { Values = dataToUpload };
-            SpreadsheetsResource.ValuesResource.AppendRequest request = service.Spreadsheets.Values.Append(valueRange, spreadsheetId, $"!A:A");
-            request.ValueInputOption = SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.RAW;
-            var response = request.Execute();
         }
-        static bool IsFirstRowEmpty(SheetsService service)
-        {
-            // 스프레드시트의 A1 셀의 값을 가져옵니다.
-            SpreadsheetsResource.ValuesResource.GetRequest request =
-                service.Spreadsheets.Values.Get(spreadsheetId, "A1");
-            ValueRange response = request.Execute();
-            IList<IList<object>> values = response.Values;
 
-            // A1 셀의 값이 비어 있는지 확인합니다.
-            return values == null || values.Count == 0 || values[0].Count == 0 || string.IsNullOrEmpty(Convert.ToString(values[0][0]));
-        }
         static void Discharge()//전역 선택
         {
             if ((classM >= 4 && classM <= 15) && hobong == 1)
@@ -564,7 +539,7 @@ namespace MilitarySimulation
         {
             SaveGameDataToCSV2(sender);
             SaveGameDataToCSV(sender);
-            SaveGameDataToGoogleSheets(sender);
+            SaveGameDataToGoogleSheets();
             Console.WriteLine("게임 데이터가 CSV 파일에 저장되었습니다.");
         }
         static void SaveGameDataToCSV(object? sender)
