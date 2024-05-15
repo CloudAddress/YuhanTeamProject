@@ -1,11 +1,5 @@
-﻿using Google.Apis.Sheets.v4;
-using System;
+﻿using System;
 using System.IO;
-using Google.Apis.Auth.OAuth2;
-using Google.Apis.Sheets.v4.Data;
-using Google.Apis.Services;
-using Google.Apis.Util.Store;
-using Newtonsoft.Json;
 using System.Net;
 using System.Text;
 
@@ -138,7 +132,8 @@ namespace MilitarySimulation
             int index = 0;
             Console.ReadKey(); // 사용자가 아무 키나 누를 때까지 대기
             Console.Clear(); // 화면 지우기
-            while (true)
+            bool isRunning = true;
+            while (isRunning)
             {
                 if (classM == 17)
                 {
@@ -537,12 +532,12 @@ namespace MilitarySimulation
         }
         static void CurrentDomain_ProcessExit(object? sender, EventArgs e)
         {
-            SaveGameDataToCSV2(sender);
-            SaveGameDataToCSV(sender);
+            SaveGameDataToCSV2();
+            SaveGameDataToCSV();
             SaveGameDataToGoogleSheets();
             Console.WriteLine("게임 데이터가 CSV 파일에 저장되었습니다.");
         }
-        static void SaveGameDataToCSV(object? sender)
+        static void SaveGameDataToCSV()
         {
             DateTime endTime = DateTime.Now;//종료시간 저장
             TimeSpan playTime = endTime - startTime; //플레이 시간 계산
@@ -623,7 +618,7 @@ namespace MilitarySimulation
                 writer.WriteLine();
             }
         }
-        static void SaveGameDataToCSV2(object? sender)
+        static void SaveGameDataToCSV2()
         {
             bool appendHeader = !File.Exists(@"game_data2.csv");
             // CSV 파일 생성 및 헤더 작성
