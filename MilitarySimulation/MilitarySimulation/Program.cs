@@ -1137,6 +1137,10 @@ namespace MilitarySimulation
                     Destruction = 0.0001f;//파괴
                 }
             }
+             else if (classM == 16) //대장
+            {
+                classA = "☆☆☆☆☆  대통령 ☆ ☆☆☆☆";
+             }
             application = 100 - deducted;
         }
     }
