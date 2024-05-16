@@ -1137,7 +1137,7 @@ namespace MilitarySimulation
                     Destruction = 0.0001f;//파괴
                 }
             }
-             else if (classM == 16) //대장
+             else if (classM == 17) //대장
             {
                 classA = "☆☆☆☆☆  대통령 ☆ ☆☆☆☆";
              }
