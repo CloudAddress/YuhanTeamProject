@@ -135,6 +135,8 @@ namespace MilitarySimulation
             bool isRunning = true;
             while (isRunning)
             {
+                 ArmyClass();
+                UpdateMaxValues(classM, hobong);
                 if (classM == 17)
                 {
                     string asciiArt2 = @"                                                                                                       
@@ -201,9 +203,7 @@ namespace MilitarySimulation
                 }
                 else
                 {
-                    ArmyClass();
                     Discharge();
-                    UpdateMaxValues(classM, hobong);
                     string[] choices = { "심사하기", t, "게임종료" };
 
                     Console.WriteLine($"현재 계급 : {classA} / {hobong}호봉");
