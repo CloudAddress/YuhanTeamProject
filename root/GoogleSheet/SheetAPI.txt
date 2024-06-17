@@ -1,0 +1,30 @@
+function saveDataToGoogleSheets(playerID, startTime, endTime, playTime, successfulReinforcements, failedReinforcements, dishonorableDischarges, demotions, promotionMisses, deadClass, deadHobong, homedischarges, fool, re, maxClassK, maxHobong) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.appendRow([playerID, startTime, endTime, playTime, successfulReinforcements, failedReinforcements, dishonorableDischarges, demotions, promotionMisses, deadClass, deadHobong, homedischarges, fool, re, maxClassK, maxHobong]);
+}
+function doPost(e) {
+  // URL 쿼리 문자열 파싱하여 매개변수 추출
+  var playerID = e.parameter['플레이어 ID'];
+  var startTime = e.parameter['실제 시작 시간'];
+  var endTime = e.parameter['실제 종료 시간'];
+  var playTime = e.parameter['플레이 시간(초)'];
+  var successfulReinforcements = e.parameter['전체 성공 횟수'];
+  var failedReinforcements = e.parameter['전체 실패 횟수'];
+  var dishonorableDischarges = e.parameter['전체 불명예 횟수'];
+  var demotions = e.parameter['전체 강등 횟수'];
+  var promotionMisses = e.parameter['전체 진급 누락 횟수'];
+  var deadClass = e.parameter['전체 끝났을 때 계급'];
+  var deadHobong = e.parameter['전체 끝났을 때 호봉'];
+  var homedischarges = e.parameter['전체 전역 횟수'];
+  var fool = e.parameter['소지금이 부족한 상태에서 연타한 횟수'];
+  var re = e.parameter['다시한 횟수'];
+  var maxClassK = e.parameter['최고 계급'];
+  var maxHobong = e.parameter['최고 호봉'];
+  
+  // Google Sheets에 데이터 추가
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  sheet.appendRow([playerID, startTime, endTime, playTime, successfulReinforcements, failedReinforcements, dishonorableDischarges, demotions, promotionMisses, deadClass, deadHobong, homedischarges, fool, re, maxClassK, maxHobong]);
+  
+  // 처리 완료 메시지 반환
+  return ContentService.createTextOutput("데이터가 정상적으로 처리되었습니다.");
+}
